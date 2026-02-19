@@ -1,0 +1,724 @@
+SOURCE_DOCX=pfe_version0_15_02_2026.docx
+
+COMMENTS_FOUND=0
+
+PARAGRAPHS_WITH_COMMENT_REFERENCES:
+
+  (none)
+
+TRACKED_CHANGES:
+
+  - type=insertion
+    text=PROJECT
+    context=PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS
+
+  - type=insertion
+    text=OVERVIEW AND
+    context=PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS
+
+  - type=insertion
+    text=REQUIREMENTS ANALYSIS
+    context=PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS
+
+  - type=deletion
+    text=Project Scope
+    context=PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS
+
+  - type=insertion
+    text=introductory
+    context=This introductory chapter presents the scope of the end-of-studies project conducted within in2-Technologies in the context of the EYES (EYE-D) solution. It introduces the hosting organization, clarifies the project context, and formalizes the problem statement and objectives. It also provides a high-level overview of the adopted approach, with particular emphasis on producing computer vision models that are compatible with deployment constraints on NPU-based systems.
+
+  - type=insertion
+    text=chapter
+    context=This introductory chapter presents the scope of the end-of-studies project conducted within in2-Technologies in the context of the EYES (EYE-D) solution. It introduces the hosting organization, clarifies the project context, and formalizes the problem statement and objectives. It also provides a high-level overview of the adopted approach, with particular emphasis on producing computer vision models that are compatible with deployment constraints on NPU-based systems.
+
+  - type=deletion
+    text=chapter
+    context=This introductory chapter presents the scope of the end-of-studies project conducted within in2-Technologies in the context of the EYES (EYE-D) solution. It introduces the hosting organization, clarifies the project context, and formalizes the problem statement and objectives. It also provides a high-level overview of the adopted approach, with particular emphasis on producing computer vision models that are compatible with deployment constraints on NPU-based systems.
+
+  - type=insertion
+    text=2.1
+    context=2.1 in2-Technologies
+
+  - type=insertion
+    text=(Figure 1
+    context=in2-Technologies is an IT company that positions itself around digital innovation by delivering solutions that combine software engineering, creative design, and advanced technologies. In particular, the organization emphasizes applied Artificial Intelligence as a practical lever to deliver real-world value (Figure 1.1 (a)).
+
+  - type=insertion
+    text=.1 (a))
+    context=in2-Technologies is an IT company that positions itself around digital innovation by delivering solutions that combine software engineering, creative design, and advanced technologies. In particular, the organization emphasizes applied Artificial Intelligence as a practical lever to deliver real-world value (Figure 1.1 (a)).
+
+  - type=insertion
+    text=2.2  (EYE-D)
+    context=2.2  (EYE-D)
+
+  - type=insertion
+    text=EYES is an AI-driven soluion developed within in2-Technologies and centered on computer vision and video analytics. It is presented as an approach that transforms existing video surveillance infrastructures into a system capable of producing actionable insights
+    context=EYES is an AI-driven soluion developed within in2-Technologies and centered on computer vision and video analytics. It is presented as an approach that transforms existing video surveillance infrastructures into a system capable of producing actionable insights (Figure 1.1 (b)).
+
+  - type=insertion
+    text=(Figure 1.1 (b))
+    context=EYES is an AI-driven soluion developed within in2-Technologies and centered on computer vision and video analytics. It is presented as an approach that transforms existing video surveillance infrastructures into a system capable of producing actionable insights (Figure 1.1 (b)).
+
+  - type=insertion
+    text=.
+    context=EYES is an AI-driven soluion developed within in2-Technologies and centered on computer vision and video analytics. It is presented as an approach that transforms existing video surveillance infrastructures into a system capable of producing actionable insights (Figure 1.1 (b)).
+
+  - type=insertion
+    text=Based on the provided communication materials, EYES is designed to integrate with existing camera networks and perform on-site processing. This positioning aims to reduce dependence on cloud processing, improve responsiveness, and address operational constraints such as privacy considerations and deployment cost.
+    context=Based on the provided communication materials, EYES is designed to integrate with existing camera networks and perform on-site processing. This positioning aims to reduce dependence on cloud processing, improve responsiveness, and address operational constraints such as privacy considerations and deployment cost.
+
+  - type=insertion
+    text=EYES is also described as modular and expandable, enabling the activation or integration of AI modules according to the targeted needs. The communication materials highlight use
+    context=EYES is also described as modular and expandable, enabling the activation or integration of AI modules according to the targeted needs. The communication materials highlight use  Case related to security monitoring and industrial safety, with real-time alerting and reporting.
+
+  - type=insertion
+    text=Case related to security monitoring and industrial safety, with real-time alerting and reporting.
+    context=EYES is also described as modular and expandable, enabling the activation or integration of AI modules according to the targeted needs. The communication materials highlight use  Case related to security monitoring and industrial safety, with real-time alerting and reporting.
+
+  - type=insertion
+    text=From an operational perspective, the provided materials emphasize the following aspects:
+    context=From an operational perspective, the provided materials emphasize the following aspects:
+
+  - type=insertion
+    text=Integration: EYES connects to an existing camera network and can be installed with minimal disruption.
+    context=Integration: EYES connects to an existing camera network and can be installed with minimal disruption.
+
+  - type=insertion
+    text=On-device processing: video analytics are executed locally to provide real-time insights and to reduce reliance on external connectivity.
+    context=On-device processing: video analytics are executed locally to provide real-time insights and to reduce reliance on external connectivity.
+
+  - type=insertion
+    text=Expandable modules: the solution supports an evolving library of AI modules that can be enabled according to the deployment context.
+    context=Expandable modules: the solution supports an evolving library of AI modules that can be enabled according to the deployment context.
+
+  - type=insertion
+    text=Monitoring and reporting: the solution provides alerts and reporting capabilities to support operational decision-making.
+    context=Monitoring and reporting: the solution provides alerts and reporting capabilities to support operational decision-making.
+
+  - type=insertion
+    text=The EYES brochure highlights a range of security and industrial safety features
+    context=The EYES brochure highlights a range of security and industrial safety features, including access control and intrusion detection, people and vehicle detection, fire and emergency response related detection, and safety compliance monitoring. These capabilities motivate the need for robust, efficient, and deployable computer vision models under edge constraints, which is the focus of this project.
+
+  - type=insertion
+    text=, including access control and intrusion detection, people and vehicle detection, fire and emergency response related detection, and safety compliance monitoring. These capabilities motivate the need for robust, efficient, and deployable computer vision models under edge constraints, which is the focus of this project.
+    context=The EYES brochure highlights a range of security and industrial safety features, including access control and intrusion detection, people and vehicle detection, fire and emergency response related detection, and safety compliance monitoring. These capabilities motivate the need for robust, efficient, and deployable computer vision models under edge constraints, which is the focus of this project.
+
+  - type=insertion
+    text=According to the public information provided for this report, EYES has been highlighted through multiple milestones and participations, including:
+    context=According to the public information provided for this report, EYES has been highlighted through multiple milestones and participations, including:
+
+  - type=insertion
+    text=Selection as a winner in an AI-focused innovation program (AI Garage Cohort 3 at Novation City).
+    context=Selection as a winner in an AI-focused innovation program (AI Garage Cohort 3 at Novation City).
+
+  - type=insertion
+    text=First place in the Tunisia IoT & AI Challenge 2025, followed by participation in the Arab IoT & AI Challenge in Dubai.
+    context=First place in the Tunisia IoT & AI Challenge 2025, followed by participation in the Arab IoT & AI Challenge in Dubai.
+
+  - type=insertion
+    text=Presence in technology events such as Big Tech Africa, STEP Dubai 2025, Security Expo London 2025, and GITEX Expand North Star.
+    context=Presence in technology events such as Big Tech Africa, STEP Dubai 2025, Security Expo London 2025, and GITEX Expand North Star.
+
+  - type=insertion
+    text=(a) in2-Technologies(b) EYES (EYE-D) Figure 1.1: in2-Technologies and EYES logo
+    context=(a) in2-Technologies(b) EYES (EYE-D) Figure 1.1: in2-Technologies and EYES logos
+
+  - type=insertion
+    text=s
+    context=(a) in2-Technologies(b) EYES (EYE-D) Figure 1.1: in2-Technologies and EYES logos
+
+  - type=insertion
+    text=Project Presentation
+    context=Project Presentation
+
+  - type=insertion
+    text=3.1 Project Context
+    context=3.1 Project Context
+
+  - type=insertion
+    text=This project is part of the final study program aiming to obtain the Bachelor’s Degree in Computer Science from the Higher Institute of Computer Science and Mathematics of Monastir. The project is carried out within the company in2-Technologies. The project focuses on developing and deploying computer vision models on constrained embedded platforms with NPU (Neural Processing Unit ) accelerators. Target hardware details are confidential (
+    context=This project is part of the final study program aiming to obtain the Bachelor’s Degree in Computer Science from the Higher Institute of Computer Science and Mathematics of Monastir. The project is carried out within the company in2-Technologies. The project focuses on developing and deploying computer vision models on constrained embedded platforms with NPU (Neural Processing Unit ) accelerators. Target hardware details are confidential ( under a signed NDA).
+
+  - type=insertion
+    text=under a signed NDA
+    context=This project is part of the final study program aiming to obtain the Bachelor’s Degree in Computer Science from the Higher Institute of Computer Science and Mathematics of Monastir. The project is carried out within the company in2-Technologies. The project focuses on developing and deploying computer vision models on constrained embedded platforms with NPU (Neural Processing Unit ) accelerators. Target hardware details are confidential ( under a signed NDA).
+
+  - type=insertion
+    text=).
+    context=This project is part of the final study program aiming to obtain the Bachelor’s Degree in Computer Science from the Higher Institute of Computer Science and Mathematics of Monastir. The project is carried out within the company in2-Technologies. The project focuses on developing and deploying computer vision models on constrained embedded platforms with NPU (Neural Processing Unit ) accelerators. Target hardware details are confidential ( under a signed NDA).
+
+  - type=insertion
+    text=Within the EYES context, the project contributes to an applied video analytics solution where on-device inference is required for responsiveness, operational constraints, and deployment practicality. The scope of the work includes a set of computer vision tasks required by the solution, covering multiple model families. The overall goal is not limited to training models, but extends to building complete and reliable pipelines that support deployment and monitoring in realistic operational conditions.
+    context=Within the EYES context, the project contributes to an applied video analytics solution where on-device inference is required for responsiveness, operational constraints, and deployment practicality. The scope of the work includes a set of computer vision tasks required by the solution, covering multiple model families. The overall goal is not limited to training models, but extends to building complete and reliable pipelines that support deployment and monitoring in realistic operational conditions.
+
+  - type=insertion
+    text=3.2
+    context=3.2 Problem Statement
+
+  - type=insertion
+    text=Problem Statement
+    context=3.2 Problem Statement
+
+  - type=insertion
+    text=Although computer vision models can achieve strong accuracy in research settings, deploying them
+    context=Although computer vision models can achieve strong accuracy in research settings, deploying them on NPU-based platforms introduces several constraints and practical difficulties. In particular, the project must address the following issues:
+
+  - type=insertion
+    text=on NPU-based platforms introduces several constraints and practical difficulties. In particular, the project must address the following issues:
+    context=Although computer vision models can achieve strong accuracy in research settings, deploying them on NPU-based platforms introduces several constraints and practical difficulties. In particular, the project must address the following issues:
+
+  - type=insertion
+    text=Deployment constraints: limited memory and compute budgets, strict latency requirements, and limited operator support depending on the target accelerator.
+    context=Deployment constraints: limited memory and compute budgets, strict latency requirements, and limited operator support depending on the target accelerator.
+
+  - type=insertion
+    text=Model portability: ensuring that trained models can be exported to an interoperable format (e.g., ONNX) and then converted into optimized inference artifacts.
+    context=Model portability: ensuring that trained models can be exported to an interoperable format (e.g., ONNX) and then converted into optimized inference artifacts.
+
+  - type=insertion
+    text=Performance trade-offs: balancing accuracy, inference speed, and power consumption when selecting architectures and optimization strategies.
+    context=Performance trade-offs: balancing accuracy, inference speed, and power consumption when selecting architectures and optimization strategies.
+
+  - type=insertion
+    text=Pipeline robustness: handling runtime failures and edge cases through systematic error handling and stable orchestration across multiple vision tasks.
+    context=Pipeline robustness: handling runtime failures and edge cases through systematic error handling and stable orchestration across multiple vision tasks.
+
+  - type=insertion
+    text=Project Purpose
+    context=Project Purpose
+
+  - type=insertion
+    text=The main objective of this project is to design an end-to-end workflow that produces computer vision models fit for NPU deployment while maintaining reliable inference pipelines for EYES.
+    context=The main objective of this project is to design an end-to-end workflow that produces computer vision models fit for NPU deployment while maintaining reliable inference pipelines for EYES.
+
+  - type=insertion
+    text=The following guiding questions and objectives summarize the expected contribution of the project.
+    context=The following guiding questions and objectives summarize the expected contribution of the project.
+
+  - type=insertion
+    text=Table 1.1: Guiding questions and corresponding project objectives
+    context=Table 1.1: Guiding questions and corresponding project objectives
+
+  - type=insertion
+    text=Guiding Question
+    context=Guiding Question
+
+  - type=insertion
+    text=Project Objective
+    context=Project Objective
+
+  - type=insertion
+    text=How can we deploy computer vision models under strict edge constraints?
+    context=How can we deploy computer vision models under strict edge constraints?
+
+  - type=insertion
+    text=Build an optimization and deployment pipeline compatible with NPU execution.
+    context=Build an optimization and deployment pipeline compatible with NPU execution.
+
+  - type=insertion
+    text=How can we maintain acceptable accuracy without exceeding latency and power budgets?
+    context=How can we maintain acceptable accuracy without exceeding latency and power budgets?
+
+  - type=insertion
+    text=Select and tune suitable architectures, then benchmark trade-offs on representative workloads.
+    context=Select and tune suitable architectures, then benchmark trade-offs on representative workloads.
+
+  - type=insertion
+    text=How can we ensure stable integration in a multi-task video analytics product?
+    context=How can we ensure stable integration in a multi-task video analytics product?
+
+  - type=insertion
+    text=Integrate inference into robust pipelines with monitoring, validation, and failure handling.
+    context=Integrate inference into robust pipelines with monitoring, validation, and failure handling.
+
+  - type=insertion
+    text=The web Application ??
+    context=The web Application ??
+
+  - type=insertion
+    text=The 5 W’s
+    context=The 5 W’s
+
+  - type=insertion
+    text=In order to clarify the scope of the project and align expectations, the project can be summarized using the 5 W’s framework.
+    context=In order to clarify the scope of the project and align expectations, the project can be summarized using the 5 W’s framework.
+
+  - type=insertion
+    text=Aspect
+    context=Aspect
+
+  - type=insertion
+    text=Description
+    context=Description
+
+  - type=insertion
+    text=Who?
+    context=Who?
+
+  - type=insertion
+    text=The project stakeholders include in2-Technologies, the EYES product team, and the operational users of video analytics solutions.
+    context=The project stakeholders include in2-Technologies, the EYES product team, and the operational users of video analytics solutions.
+
+  - type=insertion
+    text=What?
+    context=What?
+
+  - type=insertion
+    text=The project involves the development and integration of an end-to-end workflow for computer vision models within EYES.
+    context=The project involves the development and integration of an end-to-end workflow for computer vision models within EYES.
+
+  - type=insertion
+    text=The workflow covers training, export to ONNX, optimization, and integration for edge inference.
+    context=The workflow covers training, export to ONNX, optimization, and integration for edge inference.
+
+  - type=insertion
+    text=When?
+    context=When?
+
+  - type=insertion
+    text=EYES is under continuous development and is updated in response to evolving market needs.
+    context=EYES is under continuous development and is updated in response to evolving market needs.
+
+  - type=insertion
+    text=Where?
+    context=Where?
+
+  - type=insertion
+    text=Within the in2-Technologies environment, targeting an embedded deployment platform equipped with an NPU (details confidential under NDA).
+    context=Within the in2-Technologies environment, targeting an embedded deployment platform equipped with an NPU (details confidential under NDA).
+
+  - type=insertion
+    text=Why?
+    context=Why?
+
+  - type=insertion
+    text=Reduce reliance on cloud processing by enabling reliable on-device analytics.
+    context=Reduce reliance on cloud processing by enabling reliable on-device analytics.
+
+  - type=insertion
+    text=Improve responsiveness by meeting latency, compute, and power constraints on the target platform.
+    context=Improve responsiveness by meeting latency, compute, and power constraints on the target platform.
+
+  - type=insertion
+    text=Table 1.2: The Project’s 5 W’s
+    context=Table 1.2: The Project’s 5 W’s
+
+  - type=insertion
+    text=Project Steps
+    context=Project Steps
+
+  - type=insertion
+    text=This project follows an iterative and incremental approach to deliver deployable computer vision components for EYES.
+    context=This project follows an iterative and incremental approach to deliver deployable computer vision components for EYES.
+
+  - type=insertion
+    text=At a high level, the work is organized into the following steps:
+    context=At a high level, the work is organized into the following steps:
+
+  - type=insertion
+    text=Data collection and preparation using an internal data collector (confidential under NDA).
+    context=Data collection and preparation using an internal data collector (confidential under NDA).
+
+  - type=insertion
+    text=Model selection and training using PyTorch, focusing on architectures suitable for edge deployment.
+    context=Model selection and training using PyTorch, focusing on architectures suitable for edge deployment.
+
+  - type=insertion
+    text=Model export to ONNX and validation to ensure correctness after conversion.
+    context=Model export to ONNX and validation to ensure correctness after conversion.
+
+  - type=insertion
+    text=Optimization into deployment-ready inference artifacts suitable for the target platform.
+    context=Optimization into deployment-ready inference artifacts suitable for the target platform.
+
+  - type=insertion
+    text=Integration into multi-task pipelines with systematic validation and failure handling.
+    context=Integration into multi-task pipelines with systematic validation and failure handling.
+
+  - type=insertion
+    text=Benchmarking of runtime indicators (latency, memory, and power) under representative inference workloads.
+    context=Benchmarking of runtime indicators (latency, memory, and power) under representative inference workloads.
+
+  - type=insertion
+    text=Existing Solutions ??
+    context=Existing Solutions ??
+
+  - type=insertion
+    text=Critique Of Existing Solutions ??
+    context=Critique Of Existing Solutions ??
+
+  - type=insertion
+    text=Adopted Project Management Methodology
+    context=Adopted Project Management Methodology
+
+  - type=insertion
+    text=The project is conducted using an iterative approach that allows incremental delivery and continuous validation. This approach is suitable for AI engineering workflows where model performance, deployment compatibility, and resource constraints must be checked throughout the development cycle.
+    context=The project is conducted using an iterative approach that allows incremental delivery and continuous validation. This approach is suitable for AI engineering workflows where model performance, deployment compatibility, and resource constraints must be checked throughout the development cycle.
+
+  - type=insertion
+    text=For this project, we adopt the Scrum methodology as an Agile project management framework. The work is organized into time-boxed sprints, enabling regular planning, implementation, and review cycles. This organization supports continuous refinement of both model quality and deployment readiness.
+    context=For this project, we adopt the Scrum methodology as an Agile project management framework. The work is organized into time-boxed sprints, enabling regular planning, implementation, and review cycles. This organization supports continuous refinement of both model quality and deployment readiness.
+
+  - type=insertion
+    text=Table 1.3: Scrum methodology and its adoption in the project
+    context=Table 1.3: Scrum methodology and its adoption in the project
+
+  - type=insertion
+    text=Scrum Element
+    context=Scrum Element
+
+  - type=insertion
+    text=Project Adoption
+    context=Project Adoption
+
+  - type=insertion
+    text=Product Backlog
+    context=Product Backlog
+
+  - type=insertion
+    text=Maintain a prioritized list of tasks covering training, optimization, and integration activities.
+    context=Maintain a prioritized list of tasks covering training, optimization, and integration activities.
+
+  - type=insertion
+    text=Sprint Planning
+    context=Sprint Planning
+
+  - type=insertion
+    text=Select sprint goals and define deliverables that can be validated on the target platform.
+    context=Select sprint goals and define deliverables that can be validated on the target platform.
+
+  - type=insertion
+    text=Sprint
+    context=Sprint
+
+  - type=insertion
+    text=Implement and integrate incremental improvements, with frequent checks on performance constraints.
+    context=Implement and integrate incremental improvements, with frequent checks on performance constraints.
+
+  - type=insertion
+    text=Sprint Review
+    context=Sprint Review
+
+  - type=insertion
+    text=Demonstrate the sprint increment (models, pipelines, or benchmarks) and collect feedback.
+    context=Demonstrate the sprint increment (models, pipelines, or benchmarks) and collect feedback.
+
+  - type=insertion
+    text=Sprint Retrospective
+    context=Sprint Retrospective
+
+  - type=insertion
+    text=Identify process improvements and adapt the next sprint organization accordingly.
+    context=Identify process improvements and adapt the next sprint organization accordingly.
+
+  - type=insertion
+    text=For project tracking and collaboration, GitHub is used as the central platform. It supports version control, task tracking through issues, and coordination of development activities throughout the project lifecycle.
+    context=For project tracking and collaboration, GitHub is used as the central platform. It supports version control, task tracking through issues, and coordination of development activities throughout the project lifecycle.
+
+  - type=insertion
+    text=Conclusion
+    context=Conclusion
+
+  - type=insertion
+    text=This chapter presented the hosting organization and the context of the EYES solution, then defined the project scope, problem statement, objectives, and the adopted project management approach. The next chapter will introduce the technical background required for this work, including computer vision modeling, ONNX export, and deployment-oriented optimization for NPU-based inference
+    context=This chapter presented the hosting organization and the context of the EYES solution, then defined the project scope, problem statement, objectives, and the adopted project management approach. The next chapter will introduce the technical background required for this work, including computer vision modeling, ONNX export, and deployment-oriented optimization for NPU-based inference
+
+POTENTIAL_SUPERVISOR_NOTES:
+
+  - paragraph_index=96
+    paragraph=The web Application ??
+
+  - paragraph_index=123
+    paragraph=Existing Solutions ??
+
+  - paragraph_index=124
+    paragraph=Critique Of Existing Solutions ??
+
+FULL_PLAIN_TEXT:
+
+1 [Titre3] Order No:End of Studies Project ReportPresented in order to obtain theNational Bachelor’s Degree in Computer ScienceSpecialization:Software Engineering and Information SystemsOrder No:End of Studies Project ReportPresented in order to obtain theNational Bachelor’s Degree in Computer ScienceSpecialization:Software Engineering and Information SystemsRepublic of Tunisia
+
+2 Order No:
+
+3 End of Studies Project Report
+
+4 Presented in order to obtain the
+
+5 National Bachelor’s Degree in Computer Science
+
+6 Specialization:
+
+7 Software Engineering and Information Systems
+
+8 Order No:
+
+9 End of Studies Project Report
+
+10 Presented in order to obtain the
+
+11 National Bachelor’s Degree in Computer Science
+
+12 Specialization:
+
+13 Software Engineering and Information Systems
+
+14 *****
+
+15 [Titre3] Ministry of Higher Education and Scientific Research
+
+16 *****
+
+17 [Titre3] University of Monastir
+
+18 *****
+
+19 Higher Institute of Computer Science and Mathematics of Monastir Department of Computer Science
+
+20 By:
+
+21 Mohamed Youssef Fathallah
+
+22 Computer Vision Models Fit for NPUs
+
+23 Presented onin front of the jury composed of:
+
+24 President Member
+
+25 Ms. Nada Haj MessaoudAcademic Supervisor
+
+26 Mr Ilyes TliliProfessional Supervisor
+
+27 Academic Year: 2025 / 2026
+
+28 Contents
+
+29 Project Scope1
+
+30 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .1
+
+31 Host Organization Presentation . . . . . . . . . . . . . . . . . . . . . . . . . .1
+
+32 in2-Technologies . . . . . . . . . . . . . . . . . . . . . . . . . . . . .1
+
+33 EYES (EYE-D) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .1
+
+34 Project Presentation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+
+35 Project Context . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+
+36 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+
+37 Project Purpose . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .3
+
+38 Project Steps  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+39 Adopted Project Management Methodology . . . . . . . . . . . . . . . . . . .5
+
+40 Conclusion. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+
+41 List of Figures
+
+42 in2-Technologies and EYES logos . . . . . . . . . . . . . . . . . . . . . . . .2
+
+43 Scrum Vs Traditional . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+44 Scrum Team . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+45 Scrum Process . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+46 List of Tables
+
+47 Guiding questions and corresponding project objectives . . . . . . . . . . . . .3
+
+48 The Project’s 5 W’s . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+
+49 Scrum methodology and its adoption in the project. . . . . . . . . . . . . . .
+
+50 [Titre3] Chapter 1
+
+51 PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS
+
+52 [Titre1] Introduction
+
+53 This introductory chapter presents the scope of the end-of-studies project conducted within in2-Technologies in the context of the EYES (EYE-D) solution. It introduces the hosting organization, clarifies the project context, and formalizes the problem statement and objectives. It also provides a high-level overview of the adopted approach, with particular emphasis on producing computer vision models that are compatible with deployment constraints on NPU-based systems.
+
+54 [Titre1] Host Organization Presentation
+
+55 [Titre2] 2.1 in2-Technologies
+
+56 in2-Technologies is an IT company that positions itself around digital innovation by delivering solutions that combine software engineering, creative design, and advanced technologies. In particular, the organization emphasizes applied Artificial Intelligence as a practical lever to deliver real-world value (Figure 1.1 (a)).
+
+57 According to the public communications provided for this report, in2-Technologies is actively involved in the innovation ecosystem through participation in events and technology programs. These activities help connect the company with partners and stakeholders, and they support continuous improvement by confronting products with real deployment needs.
+
+58 In this context, in2-Technologies develops EYES, an AI-driven solution focused on video analytics and on-device intelligence.
+
+59 [Titre2] 2.2  (EYE-D)
+
+60 EYES is an AI-driven soluion developed within in2-Technologies and centered on computer vision and video analytics. It is presented as an approach that transforms existing video surveillance infrastructures into a system capable of producing actionable insights (Figure 1.1 (b)).
+
+61 Based on the provided communication materials, EYES is designed to integrate with existing camera networks and perform on-site processing. This positioning aims to reduce dependence on cloud processing, improve responsiveness, and address operational constraints such as privacy considerations and deployment cost.
+
+62 EYES is also described as modular and expandable, enabling the activation or integration of AI modules according to the targeted needs. The communication materials highlight use  Case related to security monitoring and industrial safety, with real-time alerting and reporting.
+
+63 From an operational perspective, the provided materials emphasize the following aspects:
+
+64 Integration: EYES connects to an existing camera network and can be installed with minimal disruption.
+
+65 On-device processing: video analytics are executed locally to provide real-time insights and to reduce reliance on external connectivity.
+
+66 Expandable modules: the solution supports an evolving library of AI modules that can be enabled according to the deployment context.
+
+67 Monitoring and reporting: the solution provides alerts and reporting capabilities to support operational decision-making.
+
+68 The EYES brochure highlights a range of security and industrial safety features, including access control and intrusion detection, people and vehicle detection, fire and emergency response related detection, and safety compliance monitoring. These capabilities motivate the need for robust, efficient, and deployable computer vision models under edge constraints, which is the focus of this project.
+
+69 According to the public information provided for this report, EYES has been highlighted through multiple milestones and participations, including:
+
+70 Selection as a winner in an AI-focused innovation program (AI Garage Cohort 3 at Novation City).
+
+71 First place in the Tunisia IoT & AI Challenge 2025, followed by participation in the Arab IoT & AI Challenge in Dubai.
+
+72 Presence in technology events such as Big Tech Africa, STEP Dubai 2025, Security Expo London 2025, and GITEX Expand North Star.
+
+73 [Paragraphedeliste] (a) in2-Technologies(b) EYES (EYE-D) Figure 1.1: in2-Technologies and EYES logos
+
+74 [Paragraphedeliste] Project Presentation
+
+75 [Titre2] 3.1 Project Context
+
+76 This project is part of the final study program aiming to obtain the Bachelor’s Degree in Computer Science from the Higher Institute of Computer Science and Mathematics of Monastir. The project is carried out within the company in2-Technologies. The project focuses on developing and deploying computer vision models on constrained embedded platforms with NPU (Neural Processing Unit ) accelerators. Target hardware details are confidential ( under a signed NDA).
+
+77 Within the EYES context, the project contributes to an applied video analytics solution where on-device inference is required for responsiveness, operational constraints, and deployment practicality. The scope of the work includes a set of computer vision tasks required by the solution, covering multiple model families. The overall goal is not limited to training models, but extends to building complete and reliable pipelines that support deployment and monitoring in realistic operational conditions.
+
+78 [Titre2] 3.2 Problem Statement
+
+79 Although computer vision models can achieve strong accuracy in research settings, deploying them on NPU-based platforms introduces several constraints and practical difficulties. In particular, the project must address the following issues:
+
+80 [Paragraphedeliste] Deployment constraints: limited memory and compute budgets, strict latency requirements, and limited operator support depending on the target accelerator.
+
+81 [Paragraphedeliste] Model portability: ensuring that trained models can be exported to an interoperable format (e.g., ONNX) and then converted into optimized inference artifacts.
+
+82 [Paragraphedeliste] Performance trade-offs: balancing accuracy, inference speed, and power consumption when selecting architectures and optimization strategies.
+
+83 [Paragraphedeliste] Pipeline robustness: handling runtime failures and edge cases through systematic error handling and stable orchestration across multiple vision tasks.
+
+84 [Titre2] Project Purpose
+
+85 The main objective of this project is to design an end-to-end workflow that produces computer vision models fit for NPU deployment while maintaining reliable inference pipelines for EYES.
+
+86 The following guiding questions and objectives summarize the expected contribution of the project.
+
+87 Table 1.1: Guiding questions and corresponding project objectives
+
+88 Guiding Question
+
+89 Project Objective
+
+90 How can we deploy computer vision models under strict edge constraints?
+
+91 Build an optimization and deployment pipeline compatible with NPU execution.
+
+92 How can we maintain acceptable accuracy without exceeding latency and power budgets?
+
+93 Select and tune suitable architectures, then benchmark trade-offs on representative workloads.
+
+94 How can we ensure stable integration in a multi-task video analytics product?
+
+95 Integrate inference into robust pipelines with monitoring, validation, and failure handling.
+
+96 The web Application ??
+
+97 [Titre4] The 5 W’s
+
+98 In order to clarify the scope of the project and align expectations, the project can be summarized using the 5 W’s framework.
+
+99 Aspect
+
+100 Description
+
+101 Who?
+
+102 The project stakeholders include in2-Technologies, the EYES product team, and the operational users of video analytics solutions.
+
+103 What?
+
+104 The project involves the development and integration of an end-to-end workflow for computer vision models within EYES.
+
+105 The workflow covers training, export to ONNX, optimization, and integration for edge inference.
+
+106 When?
+
+107 EYES is under continuous development and is updated in response to evolving market needs.
+
+108 Where?
+
+109 Within the in2-Technologies environment, targeting an embedded deployment platform equipped with an NPU (details confidential under NDA).
+
+110 Why?
+
+111 Reduce reliance on cloud processing by enabling reliable on-device analytics.
+
+112 Improve responsiveness by meeting latency, compute, and power constraints on the target platform.
+
+113 Table 1.2: The Project’s 5 W’s
+
+114 [Titre2] Project Steps
+
+115 This project follows an iterative and incremental approach to deliver deployable computer vision components for EYES.
+
+116 At a high level, the work is organized into the following steps:
+
+117 [Paragraphedeliste] Data collection and preparation using an internal data collector (confidential under NDA).
+
+118 [Paragraphedeliste] Model selection and training using PyTorch, focusing on architectures suitable for edge deployment.
+
+119 [Paragraphedeliste] Model export to ONNX and validation to ensure correctness after conversion.
+
+120 [Paragraphedeliste] Optimization into deployment-ready inference artifacts suitable for the target platform.
+
+121 [Paragraphedeliste] Integration into multi-task pipelines with systematic validation and failure handling.
+
+122 [Paragraphedeliste] Benchmarking of runtime indicators (latency, memory, and power) under representative inference workloads.
+
+123 Existing Solutions ??
+
+124 Critique Of Existing Solutions ??
+
+125 [Titre1] Adopted Project Management Methodology
+
+126 The project is conducted using an iterative approach that allows incremental delivery and continuous validation. This approach is suitable for AI engineering workflows where model performance, deployment compatibility, and resource constraints must be checked throughout the development cycle.
+
+127 For this project, we adopt the Scrum methodology as an Agile project management framework. The work is organized into time-boxed sprints, enabling regular planning, implementation, and review cycles. This organization supports continuous refinement of both model quality and deployment readiness.
+
+128 Table 1.3: Scrum methodology and its adoption in the project
+
+129 Scrum Element
+
+130 Project Adoption
+
+131 Product Backlog
+
+132 Maintain a prioritized list of tasks covering training, optimization, and integration activities.
+
+133 Sprint Planning
+
+134 Select sprint goals and define deliverables that can be validated on the target platform.
+
+135 Sprint
+
+136 Implement and integrate incremental improvements, with frequent checks on performance constraints.
+
+137 Sprint Review
+
+138 Demonstrate the sprint increment (models, pipelines, or benchmarks) and collect feedback.
+
+139 Sprint Retrospective
+
+140 Identify process improvements and adapt the next sprint organization accordingly.
+
+141 For project tracking and collaboration, GitHub is used as the central platform. It supports version control, task tracking through issues, and coordination of development activities throughout the project lifecycle.
+
+142 [Titre1] Conclusion
+
+143 This chapter presented the hosting organization and the context of the EYES solution, then defined the project scope, problem statement, objectives, and the adopted project management approach. The next chapter will introduce the technical background required for this work, including computer vision modeling, ONNX export, and deployment-oriented optimization for NPU-based inference

@@ -1,0 +1,495 @@
+{
+  "extracted_images": [
+    {
+      "path": "C:\\Users\\youss\\OneDrive\\Desktop\\youssef\\pfe_preparation\\extracted_images\\Im1.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "C:\\Users\\youss\\OneDrive\\Desktop\\youssef\\pfe_preparation\\extracted_images\\Im2.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 285,
+      "height": 347
+    },
+    {
+      "path": "C:\\Users\\youss\\OneDrive\\Desktop\\youssef\\pfe_preparation\\extracted_images\\Im3.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 2795,
+      "height": 788
+    }
+  ],
+  "reference": {
+    "pdf": "C:\\Users\\youss\\OneDrive\\Desktop\\youssef\\pfe_preparation\\old_repports\\Rapport PFE Khalyl Ebdelli.pdf",
+    "page_index": 0,
+    "page_size": [
+      595.28,
+      841.89
+    ],
+    "blocks": [
+      {
+        "bbox": [
+          255.04,
+          81.1,
+          339.9,
+          110.03
+        ],
+        "text": "Republic of Tunisia\n*****",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          180.43,
+          116.26,
+          414.39,
+          145.2
+        ],
+        "text": "Ministry of Higher Education and Scientific Research\n*****",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          247.8,
+          151.43,
+          347.08,
+          180.37
+        ],
+        "text": "University of Monastir\n*****",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          149.88,
+          186.6,
+          445.01,
+          197.51
+        ],
+        "text": "Higher Institute of Computer Science and Mathematics of Monastir",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          224.58,
+          204.18,
+          370.31,
+          215.09
+        ],
+        "text": "Department of Computer Science",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          448.52,
+          255.27,
+          524.41,
+          267.22
+        ],
+        "text": "Order N°: L15",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          138.83,
+          287.56,
+          456.45,
+          312.35
+        ],
+        "text": "End of Studies Project Report",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          207.79,
+          328.66,
+          387.49,
+          343.0
+        ],
+        "text": "Presented in order to obtain the",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          118.57,
+          356.44,
+          476.71,
+          373.66
+        ],
+        "text": "National Bachelor’s Degree in Computer Science",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          256.0,
+          388.89,
+          341.27,
+          403.24
+        ],
+        "text": "Specialization:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          122.99,
+          416.68,
+          472.29,
+          433.89
+        ],
+        "text": "Software Engineering and Information Systems",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          288.27,
+          449.13,
+          309.0,
+          463.48
+        ],
+        "text": "By:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          253.19,
+          479.12,
+          342.09,
+          493.46
+        ],
+        "text": "Ebdelli Khalyl",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          179.98,
+          531.67,
+          415.3,
+          573.95
+        ],
+        "text": "Agent-Based Solution for\nNon-Conformity Detection",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          135.14,
+          607.16,
+          462.13,
+          621.51
+        ],
+        "text": "Presented on 23/06/2025 in front of the jury composed of:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          113.39,
+          637.56,
+          481.89,
+          649.52
+        ],
+        "text": "Ms. Sameh Hbaieb\nPresident",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          113.39,
+          662.32,
+          481.89,
+          674.27
+        ],
+        "text": "Ms. Achich Nassira\nMember",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          113.39,
+          687.08,
+          481.89,
+          699.03
+        ],
+        "text": "Ms. Imen Ben Ahmed\nAcademic Supervisor",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          113.39,
+          711.83,
+          481.89,
+          723.79
+        ],
+        "text": "Mr. Oussema Chargui\nProfessional Supervisor",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          228.82,
+          749.93,
+          366.46,
+          761.89
+        ],
+        "text": "Academic Year: 2024 / 2025",
+        "block_type": 0
+      }
+    ],
+    "images": [
+      {
+        "xref": 702,
+        "rects": [
+          [
+            45.51,
+            101.75,
+            124.88,
+            181.12
+          ]
+        ]
+      },
+      {
+        "xref": 703,
+        "rects": [
+          [
+            456.38,
+            70.87,
+            583.94,
+            226.18
+          ]
+        ]
+      },
+      {
+        "xref": 704,
+        "rects": [
+          [
+            0.0,
+            251.84,
+            595.31,
+            419.68
+          ]
+        ]
+      }
+    ]
+  },
+  "generated": {
+    "pdf": "C:\\Users\\youss\\OneDrive\\Desktop\\youssef\\pfe_preparation\\main.pdf",
+    "page_index": 0,
+    "page_size": [
+      595.28,
+      841.89
+    ],
+    "blocks": [
+      {
+        "bbox": [
+          143.06,
+          84.01,
+          452.24,
+          182.3
+        ],
+        "text": "Republic of Tunisia\n*****\nMinistry of Higher Education and Scientific Research\n*****\nUniversity of Monastir\n*****",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          135.95,
+          189.28,
+          459.35,
+          201.23
+        ],
+        "text": "Higher Institute of Computer Science and Mathematics of Monastir",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          217.47,
+          206.79,
+          377.82,
+          218.74
+        ],
+        "text": "Department of Computer Science",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          451.03,
+          256.39,
+          498.34,
+          269.64
+        ],
+        "text": "Order No:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          194.84,
+          289.51,
+          400.44,
+          306.73
+        ],
+        "text": "End of Studies Project Report",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          222.77,
+          330.81,
+          372.51,
+          342.76
+        ],
+        "text": "Presented in order to obtain the",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          127.38,
+          358.13,
+          467.93,
+          375.34
+        ],
+        "text": "National Bachelor’s Degree in Computer Science",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          262.12,
+          390.81,
+          333.18,
+          402.77
+        ],
+        "text": "Specialization:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          133.65,
+          418.14,
+          461.66,
+          435.36
+        ],
+        "text": "Software Engineering and Information Systems",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          289.01,
+          450.44,
+          306.28,
+          462.4
+        ],
+        "text": "By:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          199.05,
+          480.35,
+          396.24,
+          497.56
+        ],
+        "text": "Fathallah Mohamed Youssef",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          186.74,
+          532.7,
+          408.54,
+          563.11
+        ],
+        "text": "Computer Vision Models Fit for\nNPUs",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          159.06,
+          608.28,
+          436.23,
+          620.23
+        ],
+        "text": "Presented on\nin front of the jury composed of:",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          117.15,
+          637.47,
+          417.85,
+          649.48
+        ],
+        "text": "Ms. Sameh Hbaieb\nPresident",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          117.15,
+          660.58,
+          413.85,
+          672.59
+        ],
+        "text": "Ms. Achich Nassira\nMember",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          117.15,
+          683.7,
+          476.61,
+          695.7
+        ],
+        "text": "Ms. Imen Ben Ahmed\nAcademic Supervisor",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          117.15,
+          706.81,
+          487.25,
+          718.82
+        ],
+        "text": "Mr. Oussema Chargui\nProfessional Supervisor",
+        "block_type": 0
+      },
+      {
+        "bbox": [
+          228.69,
+          750.51,
+          366.6,
+          762.46
+        ],
+        "text": "Academic Year: 2025 / 2026",
+        "block_type": 0
+      }
+    ],
+    "images": [
+      {
+        "xref": 6,
+        "rects": [
+          [
+            4.18,
+            255.09,
+            599.43,
+            422.29
+          ]
+        ]
+      },
+      {
+        "xref": 7,
+        "rects": [
+          [
+            49.52,
+            105.56,
+            128.6,
+            184.63
+          ]
+        ]
+      },
+      {
+        "xref": 9,
+        "rects": [
+          [
+            458.86,
+            74.79,
+            585.95,
+            229.52
+          ]
+        ]
+      }
+    ]
+  }
+}

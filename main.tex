@@ -1,0 +1,107 @@
+\documentclass[12pt, a4paper, oneside]{report}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage[Lenny]{fncychap}
+\usepackage[labelsep=colon]{caption}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{Times New Roman}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\setlength{\emergencystretch}{2em}
+\pretolerance=1000
+\tolerance=2000
+\hyphenpenalty=500
+\exhyphenpenalty=500
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\newcommand{\logoLeft}{extracted_images/Im1.jpg}
+\newcommand{\logoRight}{extracted_images/Im2.png}
+\newcommand{\bandImage}{extracted_images/Im3.png}
+
+\begin{document}
+
+\newgeometry{margin=0cm}
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+
+\node[anchor=north west] at ($(current page.north west)+(0pt,-251.84pt)$) {\includegraphics[width=\paperwidth,height=167.84pt]{\bandImage}};
+
+\node[anchor=north west] at ($(current page.north west)+(45.51pt,-101.75pt)$) {\includegraphics[width=79.37pt,height=79.37pt]{\logoLeft}};
+\node[anchor=north west] at ($(current page.north west)+(456.38pt,-70.87pt)$) {\includegraphics[width=127.56pt,height=155.31pt]{\logoRight}};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-81.10pt)$) {\large Republic of Tunisia\\*****};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-116.26pt)$) {\large Ministry of Higher Education and Scientific Research\\*****};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-151.43pt)$) {\large University of Monastir\\*****};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-186.60pt)$) {Higher Institute of Computer Science and Mathematics of Monastir};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-204.18pt)$) {Department of Computer Science};
+
+\node[anchor=north west] at ($(current page.north west)+(448.52pt,-255.27pt)$) {Order N\textsuperscript{o}:\hspace{1.5cm}};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-287.56pt)$) {\Large End of Studies Project Report};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-328.66pt)$) {Presented in order to obtain the};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-356.44pt)$) {\Large National Bachelor’s Degree in Computer Science};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-388.89pt)$) {Specialization:};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-416.68pt)$) {\Large Software Engineering and Information Systems};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-449.13pt)$) {By:};
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-479.12pt)$) {\Large\phantom{Fathallah Mohamed Youssef}};
+
+\draw[line width=0.7pt] ($(current page.north west)+(50pt,-520pt)$) -- ($(current page.north west)+(545pt,-520pt)$);
+\draw[line width=0.7pt] ($(current page.north west)+(50pt,-585pt)$) -- ($(current page.north west)+(545pt,-585pt)$);
+
+\node[anchor=north, align=center, font=\LARGE\bfseries] at ($(current page.north)+(0pt,-531.67pt)$) {Computer Vision Models\\Fit for NPUs};
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-607.16pt)$) {Presented on\hspace{2cm} in front of the jury composed of:};
+
+\node[anchor=north west] at ($(current page.north west)+(113.39pt,-628.56pt)$) {{\renewcommand{\arraystretch}{1.6}\begin{tabular}{@{}l@{\hspace{5cm}}l@{}}
+\textbf{\phantom{Ms. Sameh Hbaieb}} & President\\
+\textbf{\phantom{Ms. Achich Nassira}} & Member\\
+\textbf{Ms. Nada Haj Messaoud} & Academic Supervisor\\
+\textbf{Mr Ilyes Tlili} & Professional Supervisor\\
+\end{tabular}}};
+
+\draw[line width=0.7pt] ($(current page.north west)+(60pt,-757pt)$) -- ($(current page.north west)+(210pt,-757pt)$);
+\draw[line width=0.7pt] ($(current page.north west)+(385pt,-757pt)$) -- ($(current page.north west)+(535pt,-757pt)$);
+
+\node[anchor=north, align=center] at ($(current page.north)+(0pt,-749.93pt)$) {Academic Year: 2025 / 2026};
+
+\end{tikzpicture}
+\end{titlepage}
+
+\restoregeometry
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\tableofcontents
+\clearpage
+
+\listoffigures
+\clearpage
+
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chap1.tex}
+
+\end{document}

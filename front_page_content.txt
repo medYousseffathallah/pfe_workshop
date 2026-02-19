@@ -1,0 +1,52 @@
+*** DESIGN INSTRUCTIONS ***
+1. Font: Times New Roman (Size 12 for normal text).
+2. Header: Center the header lines and insert "*****" between them.
+3. Top-left logo: Insert `extracted_images/Im1.jpg` near the upper-left corner.
+4. Top-right logo: Insert `extracted_images/Im2.png` near the upper-right corner.
+5. Middle band: Insert `extracted_images/Im3.png` as a full-width band.
+6. Order number: Place "Order N°:" on the right side over the band (leave blank).
+7. Missing lines: Add a full-width line above and below the title.
+8. Academic year lines: Add a short line on each side of the academic year.
+9. Jury: Use two columns (Name on the left, Role on the right).
+
+*** CONTENT ***
+
+Republic of Tunisia
+*****
+Ministry of Higher Education and Scientific Research
+*****
+University of Monastir
+*****
+Higher Institute of Computer Science and Mathematics of Monastir
+Department of Computer Science
+
+[INSERT TOP-LEFT LOGO HERE]
+[INSERT TOP-RIGHT LOGO HERE]
+[INSERT MIDDLE BAND HERE]
+
+Order N°:
+
+END OF STUDIES PROJECT REPORT
+
+Presented in order to obtain the
+National Bachelor’s Degree in Computer Science
+
+Specialization:
+Software Engineering and Information Systems
+
+By:
+Fathallah Mohamed Youssef
+
+[TITLE START]
+Computer Vision Models Fit for
+NPUs
+[TITLE END]
+
+Presented on  in front of the jury composed of:
+
+Ms. Sameh Hbaieb        President
+Ms. Achich Nassira      Member
+Ms. Imen Ben Ahmed      Academic Supervisor
+Mr. Oussema Chargui     Professional Supervisor
+
+Academic Year: 2025 / 2026
