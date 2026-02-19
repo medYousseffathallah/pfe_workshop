@@ -1,4 +1,4 @@
-\chapter{Speed and Angle Estimation (Sprint 1)}
+\chapter{Release 1: Speed and Angle Estimation}
 \label{chap:speed-angle}
 
 \section{Introduction}
@@ -6,12 +6,29 @@ This chapter presents the technical background and implementation work for speed
 
 Accurate estimation of object speed and heading direction is essential for a variety of surveillance and safety applications, including traffic monitoring, anomaly detection, and predictive analysis. The speed and angle estimation module operates as part of the broader EYES pipeline, receiving tracking information from upstream detection and tracking modules.
 
-The chapter begins with an overview of the state-of-the-art methods for speed and angle estimation in computer vision, followed by a detailed description of the implemented pipeline architecture. Mathematical foundations are then established, covering the core computations and smoothing algorithms. Implementation challenges encountered during development are discussed, along with the configuration parameters that govern the system's behavior.
+Sprint 1 aimed to establish the core infrastructure for speed and angle estimation, including the state of the art study, mathematical foundations, pipeline architecture, and initial implementation with configuration parameters.
 
-\section{State of the Art in Speed Estimation}
-\label{sec:sota-speed}
+\section{Sprint 1 Development}
 
-\subsection{Pixel-Based Methods}
+\subsection{Sprint Backlog For Sprint 1}
+
+The Sprint 1 backlog focused on building the foundational components for speed and angle estimation. The main tasks included:
+
+\begin{itemize}
+  \item Research and document state-of-the-art methods for speed estimation
+  \item Research and document state-of-the-art methods for angle and heading estimation
+  \item Design and implement the speed estimation pipeline architecture
+  \item Develop mathematical foundations for speed, curvature, and angle calculations
+  \item Implement EMA smoothing for temporal filtering
+  \item Address implementation challenges including sparse trajectories and calibration dependency
+  \item Define and document configuration parameters for pipeline tuning
+\end{itemize}
+
+\subsection{State of the Art Study}
+
+\subsubsection{Speed Estimation Methods}
+
+\paragraph{Pixel-Based Methods}
 Pixel-based speed estimation operates directly in the image coordinate space without explicit geometric transformation. Given the centroid position $(x_t, y_t)$ at frame $t$, the pixel displacement is computed as:
 
 \begin{equation}
@@ -26,7 +43,7 @@ v_{pixel} = \frac{\Delta p}{\Delta t}
 
 where $\Delta t = 1/fps$ is the time between consecutive frames. While computationally simple, pixel-based methods suffer from perspective distortion, as the relationship between pixel displacement and real-world distance varies with the object's position in the image. Objects farther from the camera appear smaller and move fewer pixels per unit of real-world distance compared to objects closer to the camera.
 
-\subsection{Homography-Based Methods}
+\paragraph{Homography-Based Methods}
 \label{subsec:homography}
 
 Homography-based approaches address the perspective distortion problem by transforming image coordinates to a top-down view of the scene. A homography matrix $\mathbf{H}$ maps points from the image plane to a world coordinate system:
@@ -52,7 +69,7 @@ The homography matrix is typically estimated from at least 4 point correspondenc
 
 The primary advantage of homography-based methods is their ability to provide physically meaningful measurements. However, they require accurate calibration and assume a planar ground surface, which may not hold in all deployment scenarios.
 
-\subsection{Optical Flow Methods}
+\paragraph{Optical Flow Methods}
 Optical flow estimates the apparent motion of pixels between consecutive frames by analyzing intensity patterns. The optical flow field $\mathbf{u}(x, y)$ at each pixel provides a dense representation of motion:
 
 \begin{equation}
@@ -69,15 +86,14 @@ where $I_x, I_y$ are spatial image gradients and $I_t$ is the temporal gradient.
 
 While optical flow provides rich motion information, it is sensitive to illumination changes, occlusions, and aperture problems. Additionally, converting optical flow to physical speed still requires knowledge of the camera geometry and scene scale.
 
-\subsection{Deep Learning-Based Methods}
+\paragraph{Deep Learning-Based Methods}
 Recent advances in deep learning have enabled end-to-end speed estimation from video frames. Convolutional neural networks (CNNs) and recurrent architectures can learn to predict speed directly from spatiotemporal features without explicit geometric modeling. 3D CNN architectures capture spatio-temporal features from sequences of consecutive frames, while hybrid approaches combine optical flow computation with CNN processing for speed regression.
 
 Deep learning methods offer the potential to handle complex scenarios and implicit scene understanding. However, they introduce additional computational overhead and require substantial training data, which may not be practical for all deployment contexts. Furthermore, the black-box nature of neural networks can complicate error analysis and calibration.
 
-\section{State of the Art in Angle and Heading Estimation}
-\label{sec:sota-angle}
+\subsubsection{Angle and Heading Estimation Methods}
 
-\subsection{Trajectory-Based Methods}
+\paragraph{Trajectory-Based Methods}
 Trajectory-based heading estimation computes the direction of motion from the object's trajectory over time. Given a sequence of positions $\{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}$, the heading angle $\theta$ can be estimated using the four-quadrant inverse tangent:
 
 \begin{equation}
@@ -92,7 +108,7 @@ where $\Delta x$ and $\Delta y$ represent the displacement between trajectory po
 
 The choice of points for computing displacement affects the estimation quality: using immediate neighbors provides responsiveness but is sensitive to noise, while using points further apart improves stability but reduces responsiveness to rapid directional changes.
 
-\subsection{Curvature-Based Methods}
+\paragraph{Curvature-Based Methods}
 For objects following curved paths, the instantaneous heading can be derived from the local curvature of the trajectory. The curvature $\kappa$ at a point is defined as:
 
 \begin{equation}
@@ -120,7 +136,7 @@ The angular rate of change $\omega$ is then computed from the curvature and spee
 
 Curvature-based methods provide smooth heading estimates that naturally account for turning behavior. However, they require higher-order derivatives of position, which can amplify noise in the trajectory data.
 
-\subsection{Angular Rate Integration}
+\paragraph{Angular Rate Integration}
 An alternative approach estimates the angular rate directly from trajectory changes. The angular rate can be computed from consecutive velocity vectors:
 
 \begin{equation}
@@ -129,12 +145,13 @@ An alternative approach estimates the angular rate directly from trajectory chan
 
 where $(v_x, v_y)$ and $(a_x, a_y)$ are the velocity and acceleration components. This formulation provides a direct estimate of the turning rate without explicit curvature computation.
 
-\section{Implemented Pipeline Architecture}
-\label{sec:pipeline}
+\subsection{Design Diagrams For Sprint 1}
+
+\subsubsection{Pipeline Architecture}
 
 The speed estimation pipeline was developed as part of Sprint 1 to provide real-time speed and angle measurements for detected objects. The architecture follows a modular design with well-defined interfaces between components.
 
-\subsection{Pipeline Modules}
+\paragraph{Pipeline Modules}
 The implementation consists of the following core modules:
 
 \begin{center}
@@ -163,7 +180,7 @@ The implementation consists of the following core modules:
 \label{fig:workflow}
 \end{figure}
 
-\subsection{Data Flow}
+\paragraph{Data Flow}
 The processing pipeline follows these stages:
 
 \begin{enumerate}
@@ -177,7 +194,7 @@ The processing pipeline follows these stages:
   \item \textbf{Constraint Validation}: Physical constraints are enforced and implausible estimates are flagged.
 \end{enumerate}
 
-\subsection{Trajectory Dot System}
+\paragraph{Trajectory Dot System}
 A key feature of the implemented pipeline is the trajectory dot system, which provides visual feedback for debugging and monitoring. The system maintains a buffer of recent trajectory points for each tracked object and renders them as a trail of dots on the display output.
 
 \begin{figure}[h]
@@ -203,10 +220,9 @@ The trajectory dot system serves multiple purposes:
   \item Presentation of motion history to operators
 \end{itemize}
 
-\section{Mathematical Foundations}
-\label{sec:math}
+\subsubsection{Mathematical Foundations}
 
-\subsection{Speed Calculation}
+\paragraph{Speed Calculation}
 The fundamental speed calculation converts displacement between trajectory points into physical speed. Given two consecutive trajectory points in world coordinates $(x_1, y_1)$ and $(x_2, y_2)$ with timestamps $t_1$ and $t_2$, the speed $v$ is computed as:
 
 \begin{equation}
@@ -215,7 +231,7 @@ v = \frac{\Delta d}{\Delta t} = \frac{\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}{t_2 
 
 The displacement $\Delta d$ is computed in world units (typically meters), yielding speed in physical units (meters per second). The homography transformation ensures that perspective effects are properly accounted for in the distance computation.
 
-\subsection{Curvature Computation}
+\paragraph{Curvature Computation}
 For heading estimation, the pipeline computes the local curvature of the trajectory. Given three consecutive points $\mathbf{p}_1$, $\mathbf{p}_2$, and $\mathbf{p}_3$, the velocity and acceleration vectors at $\mathbf{p}_2$ are approximated as:
 
 \begin{equation}
@@ -238,7 +254,7 @@ The angular rate $\omega$ represents the rate of change of the heading angle:
 \omega = v \cdot \kappa = \frac{|\mathbf{v} \times \mathbf{a}|}{|\mathbf{v}|^2}
 \end{equation}
 
-\subsection{EMA Smoothing}
+\paragraph{EMA Smoothing}
 Exponential Moving Average (EMA) smoothing is applied to reduce noise in speed and angle estimates. The EMA filter provides a simple yet effective temporal smoothing mechanism:
 
 \begin{equation}
@@ -270,7 +286,7 @@ The smoothed angle is then computed as:
 S_t = \arctan2(\sin(S_t), \cos(S_t))
 \end{equation}
 
-\subsection{Physical Constraints}
+\paragraph{Physical Constraints}
 Physical constraints are enforced to reject implausible estimates and maintain consistency with real-world behavior:
 
 \begin{itemize}
@@ -280,33 +296,33 @@ Physical constraints are enforced to reject implausible estimates and maintain c
   \item \textbf{Angular rate limits}: Heading changes are bounded by plausible turning rates for the object class.
 \end{itemize}
 
-\section{Implementation Challenges and Issues}
-\label{sec:challenges}
+\subsection{Implementation Of Sprint 1}
+
+\subsubsection{Implementation Challenges and Issues}
 
 During Sprint 1, several implementation challenges were encountered and addressed. This section documents the key issues and their mitigations.
 
-\subsection{Sparse Trajectory Dots}
+\paragraph{Sparse Trajectory Dots}
 In scenarios with low frame rates or fast-moving objects, trajectory points may be sparse, leading to inaccurate speed and angle estimates. Sparse dots result in larger time intervals $\Delta t$, which amplifies the effect of positional noise.
 
 \textbf{Mitigation}: The pipeline implements adaptive interpolation for sparse trajectories and applies stronger smoothing when the inter-frame interval exceeds a threshold. Additionally, a minimum number of trajectory points is required before producing estimates.
 
-\subsection{Zero Velocity False Positives}
+\paragraph{Zero Velocity False Positives}
 Stationary objects or objects with minimal motion may produce spurious velocity estimates due to detection jitter. Small positional variations from the detection module can be misinterpreted as motion, leading to non-zero speed estimates for stationary objects.
 
 \textbf{Mitigation}: A minimum displacement threshold is applied. Displacements below this threshold are classified as zero velocity. The threshold is configurable and can be tuned based on detection noise characteristics.
 
-\subsection{Heading Uncertainty at Low Speeds}
+\paragraph{Heading Uncertainty at Low Speeds}
 At low speeds, the trajectory direction becomes increasingly unreliable due to the dominance of positional noise over actual motion. This leads to erratic heading estimates for slow-moving or nearly stationary objects.
 
 \textbf{Mitigation}: The heading estimation module implements a confidence measure based on speed magnitude. Below a minimum speed threshold, heading estimates are either withheld or marked as low confidence. The smoothed heading is maintained from the last reliable estimate.
 
-\subsection{Calibration Dependency}
+\paragraph{Calibration Dependency}
 The homography-based approach depends critically on accurate camera calibration. Errors in the homography matrix propagate to speed and angle estimates, potentially introducing systematic biases. Furthermore, calibration must be performed for each camera viewpoint, adding to deployment overhead.
 
 \textbf{Mitigation}: The pipeline includes calibration validation checks that detect gross calibration errors by verifying expected geometric properties. Documentation for the calibration process was developed to ensure consistent setup across deployments.
 
-\section{Configuration Parameters}
-\label{sec:config}
+\subsubsection{Configuration Parameters}
 
 The speed and angle estimation pipeline exposes several configuration parameters that control its behavior. Table~\ref{tab:config-params} summarizes the key parameters and their default values.
 
