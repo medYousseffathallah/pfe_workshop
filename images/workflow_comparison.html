@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Estimation Workflows Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f2137;
+            --bg-card: #142940;
+            --text-primary: #e8f4f8;
+            --text-secondary: #8ba4b8;
+            --accent-teal: #00d4aa;
+            --accent-cyan: #00b8d4;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --border-color: #1e3a5f;
+            --glow-teal: rgba(0, 212, 170, 0.3);
+            --glow-cyan: rgba(0, 184, 212, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f7fa;
+            --bg-secondary: #e3f0f5;
+            --bg-card: #ffffff;
+            --text-primary: #0a1628;
+            --text-secondary: #4a6380;
+            --border-color: #c5d8e5;
+            --glow-teal: rgba(0, 212, 170, 0.2);
+            --glow-cyan: rgba(0, 184, 212, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 15px var(--glow-teal);
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .workflow-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workflow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .workflow-card.pixel::before { background: var(--accent-orange); }
+        .workflow-card.homography::before { background: var(--accent-teal); }
+        .workflow-card.optical::before { background: var(--accent-purple); }
+        .workflow-card.deeplearning::before { background: var(--accent-blue); }
+
+        .workflow-card.ours {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 30px var(--glow-teal);
+        }
+
+        .workflow-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .workflow-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-simple { background: var(--accent-orange); color: #000; }
+        .badge-ours { background: var(--accent-teal); color: #000; }
+        .badge-alternative { background: var(--accent-purple); color: #fff; }
+        .badge-advanced { background: var(--accent-blue); color: #fff; }
+
+        .workflow-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .mermaid-container {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .mermaid-wrapper {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-controls {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.25rem;
+            background: var(--bg-card);
+            border-radius: 6px;
+            padding: 0.25rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .zoom-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .zoom-btn:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .points-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .points-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .points-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.85rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .points-list.advantages li::before { background: var(--accent-teal); }
+        .points-list.issues li::before { background: var(--accent-red); }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.75rem;
+            background: linear-gradient(180deg, var(--accent-teal), var(--accent-cyan));
+            border-radius: 2px;
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--bg-secondary);
+        }
+
+        .comparison-table tr.highlight {
+            background: rgba(0, 212, 170, 0.1);
+        }
+
+        .comparison-table tr.highlight td {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .rating-low { color: var(--accent-orange); }
+        .rating-medium { color: var(--accent-purple); }
+        .rating-high { color: var(--accent-teal); }
+        .rating-yes { color: var(--accent-teal); font-weight: 600; }
+        .rating-no { color: var(--text-secondary); }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 184, 212, 0.1));
+            border: 1px solid var(--accent-teal);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .summary-box h3 {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .summary-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <div class="container">
+        <header>
+            <h1>Speed Estimation Workflows</h1>
+            <p class="subtitle">A comprehensive comparison of approaches for video-based speed measurement</p>
+        </header>
+
+        <div class="workflow-grid">
+            <!-- Pixel-Based Workflow -->
+            <div class="workflow-card pixel">
+                <div class="workflow-header">
+                    <span class="workflow-badge badge-simple">Simple</span>
+                    <h2 class="workflow-title">Pixel-Based Workflow</h2>
+                </div>
+                <div class="mermaid-container">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomDiagram(this, -0.1)">-</button>
+                        <button class="zoom-btn" onclick="zoomDiagram(this, 0.1)">+</button>
+                        <button class="zoom-btn" onclick="resetZoom(this)">reset</button>
+                    </div>
+                    <div class="mermaid-wrapper">
+                        <pre class="mermaid">
+flowchart LR
+    A[📹 Video Frame] --> B[🔍 Object Detection]
+    B --> C[📍 Centroid Tracking]
+    C --> D[📐 Pixel Displacement]
+    D --> E[⚡ Speed px/frame]
+    
+    style A fill:#f59e0b,stroke:#d97706,color:#000
+    style E fill:#f59e0b,stroke:#d97706,color:#000
+                        </pre>
+                    </div>
+                </div>
+                <ul class="points-list issues">
+                    <li>No perspective correction applied</li>
+                    <li>Scale varies significantly with distance</li>
+                    <li>Output in pixels/frame, not physical units</li>
+                    <li>Accuracy decreases with camera angle</li>
+                </ul>
+            </div>
+
+            <!-- Homography-Based Workflow (Ours) -->
+            <div class="workflow-card homography ours">
+                <div class="workflow-header">
+                    <span class="workflow-badge badge-ours">Our Implementation</span>
+                    <h2 class="workflow-title">Homography-Based Workflow</h2>
+                </div>
+                <div class="mermaid-container">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomDiagram(this, -0.1)">-</button>
+                        <button class="zoom-btn" onclick="zoomDiagram(this, 0.1)">+</button>
+                        <button class="zoom-btn" onclick="resetZoom(this)">reset</button>
+                    </div>
+                    <div class="mermaid-wrapper">
+                        <pre class="mermaid">
+flowchart LR
+    A[📹 Video Frame] --> B[🔍 Object Detection]
+    B --> C[🎯 Tracking]
+    C --> D[🔄 Homography Transform]
+    D --> E[🌍 World Coordinates]
+    E --> F[⚡ Speed m/s]
+    E --> G[📐 Angle θ]
+    
+    subgraph Calibration
+        H[4-Point Calibration]
+        I[H Matrix]
+        J[Bottom-Center Anchor]
+    end
+    
+    H --> D
+    I --> D
+    J --> C
+    
+    style A fill:#00d4aa,stroke:#00a88a,color:#000
+    style F fill:#00d4aa,stroke:#00a88a,color:#000
+    style G fill:#00b8d4,stroke:#0098a8,color:#000
+                        </pre>
+                    </div>
+                </div>
+                <ul class="points-list advantages">
+                    <li>Perspective corrected measurements</li>
+                    <li>Real-world units (m/s) output</li>
+                    <li>Direction/angle estimation included</li>
+                    <li>4-point calibration, bottom-center anchor</li>
+                </ul>
+            </div>
+
+            <!-- Optical Flow Workflow -->
+            <div class="workflow-card optical">
+                <div class="workflow-header">
+                    <span class="workflow-badge badge-alternative">Alternative</span>
+                    <h2 class="workflow-title">Optical Flow Workflow</h2>
+                </div>
+                <div class="mermaid-container">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomDiagram(this, -0.1)">-</button>
+                        <button class="zoom-btn" onclick="zoomDiagram(this, 0.1)">+</button>
+                        <button class="zoom-btn" onclick="resetZoom(this)">reset</button>
+                    </div>
+                    <div class="mermaid-wrapper">
+                        <pre class="mermaid">
+flowchart LR
+    A[📹 Video Frame] --> B[⭐ Feature Detection]
+    B --> C[🌊 Optical Flow]
+    C --> D[📊 Motion Vectors]
+    D --> E[🔢 Aggregation]
+    E --> F[⚡ Speed]
+    
+    subgraph Algorithms
+        G[Lukas-Kanade]
+        H[Farneback]
+    end
+    
+    G --> C
+    H --> C
+    
+    style A fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style F fill:#8b5cf6,stroke:#7c3aed,color:#fff
+                        </pre>
+                    </div>
+                </div>
+                <ul class="points-list advantages">
+                    <li>Dense motion field estimation</li>
+                    <li>No explicit object tracking needed</li>
+                    <li>Handles multiple motion patterns</li>
+                </ul>
+                <ul class="points-list issues">
+                    <li>Sensitive to illumination changes</li>
+                    <li>Still requires calibration for physical units</li>
+                </ul>
+            </div>
+
+            <!-- Deep Learning Workflow -->
+            <div class="workflow-card deeplearning">
+                <div class="workflow-header">
+                    <span class="workflow-badge badge-advanced">Advanced</span>
+                    <h2 class="workflow-title">Deep Learning Workflow</h2>
+                </div>
+                <div class="mermaid-container">
+                    <div class="zoom-controls">
+                        <button class="zoom-btn" onclick="zoomDiagram(this, -0.1)">-</button>
+                        <button class="zoom-btn" onclick="zoomDiagram(this, 0.1)">+</button>
+                        <button class="zoom-btn" onclick="resetZoom(this)">reset</button>
+                    </div>
+                    <div class="mermaid-wrapper">
+                        <pre class="mermaid">
+flowchart LR
+    A[📹 Video Frames] --> B[🧠 3D CNN / Transformer]
+    B --> C[📈 Speed Regression]
+    
+    subgraph Training
+        D[📊 Labeled Dataset]
+        E[⚡ GPU Training]
+        F[🎯 Fine-tuning]
+    end
+    
+    D --> B
+    E --> B
+    F --> B
+    
+    style A fill:#3b82f6,stroke:#2563eb,color:#fff
+    style B fill:#3b82f6,stroke:#2563eb,color:#fff
+    style C fill:#60a5fa,stroke:#3b82f6,color:#fff
+                        </pre>
+                    </div>
+                </div>
+                <ul class="points-list advantages">
+                    <li>Learned features automatically</li>
+                    <li>Handles complex scenarios</li>
+                    <li>No explicit calibration needed</li>
+                </ul>
+                <ul class="points-list issues">
+                    <li>Requires large labeled training data</li>
+                    <li>High computational overhead</li>
+                    <li>Black-box interpretability issues</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">Comparison Matrix</h2>
+
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Accuracy</th>
+                        <th>Computational Cost</th>
+                        <th>Calibration Required</th>
+                        <th>Real-time Capable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pixel-Based</strong></td>
+                        <td class="rating-low">Low</td>
+                        <td class="rating-high">Low</td>
+                        <td class="rating-no">No</td>
+                        <td class="rating-yes">Yes</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>Homography (Ours)</strong></td>
+                        <td class="rating-high">High</td>
+                        <td class="rating-medium">Medium</td>
+                        <td>Yes (4-point)</td>
+                        <td class="rating-yes">Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Optical Flow</strong></td>
+                        <td class="rating-medium">Medium</td>
+                        <td class="rating-medium">Medium</td>
+                        <td>Yes</td>
+                        <td>Marginal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deep Learning</strong></td>
+                        <td class="rating-high">High</td>
+                        <td class="rating-low">High</td>
+                        <td class="rating-no">No (learned)</td>
+                        <td>Depends on hardware</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-dot" style="background: var(--accent-teal);"></span>
+                <span>High / Yes</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot" style="background: var(--accent-purple);"></span>
+                <span>Medium</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot" style="background: var(--accent-orange);"></span>
+                <span>Low</span>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h3>Why Homography-Based Approach?</h3>
+            <p>
+                Our homography-based implementation strikes the optimal balance between accuracy and computational efficiency. 
+                By leveraging a 4-point calibration matrix with bottom-center anchoring, we achieve perspective-corrected 
+                measurements in real-world units (m/s) while maintaining real-time performance. This approach provides 
+                both speed magnitude and direction estimation, making it ideal for traffic monitoring and surveillance applications 
+                where understanding object trajectory is as important as speed measurement.
+            </p>
+        </div>
+
+        <footer>
+            <p>Speed Estimation Workflow Comparison | Generated with <code>Mermaid.js</code> + Custom CSS</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            themeVariables: {
+                primaryColor: '#142940',
+                primaryTextColor: '#e8f4f8',
+                primaryBorderColor: '#1e3a5f',
+                lineColor: '#3b82f6',
+                secondaryColor: '#0f2137',
+                tertiaryColor: '#0a1628'
+            }
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                body.removeAttribute('data-theme');
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: 'dark',
+                    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+                    themeVariables: {
+                        primaryColor: '#142940',
+                        primaryTextColor: '#e8f4f8',
+                        primaryBorderColor: '#1e3a5f',
+                        lineColor: '#3b82f6',
+                        secondaryColor: '#0f2137',
+                        tertiaryColor: '#0a1628'
+                    }
+                });
+            } else {
+                body.setAttribute('data-theme', 'light');
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: 'base',
+                    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+                    themeVariables: {
+                        primaryColor: '#ffffff',
+                        primaryTextColor: '#0a1628',
+                        primaryBorderColor: '#c5d8e5',
+                        lineColor: '#3b82f6',
+                        secondaryColor: '#e3f0f5',
+                        tertiaryColor: '#f0f7fa'
+                    }
+                });
+            }
+            mermaid.run();
+        }
+
+        function zoomDiagram(btn, delta) {
+            const container = btn.closest('.mermaid-container');
+            const svg = container.querySelector('svg');
+            if (svg) {
+                const currentScale = parseFloat(svg.style.transform.replace('scale(', '').replace(')', '') || 1);
+                const newScale = Math.max(0.5, Math.min(2, currentScale + delta));
+                svg.style.transform = `scale(${newScale})`;
+                svg.style.transformOrigin = 'center center';
+            }
+        }
+
+        function resetZoom(btn) {
+            const container = btn.closest('.mermaid-container');
+            const svg = container.querySelector('svg');
+            if (svg) {
+                svg.style.transform = 'scale(1)';
+            }
+        }
+    </script>
+</body>
+</html>

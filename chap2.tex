@@ -24,6 +24,41 @@ The Sprint 1 backlog focused on building the foundational components for speed a
   \item Define and document configuration parameters for pipeline tuning
 \end{itemize}
 
+\subsubsection{Resources and Datasets}
+
+\paragraph{Models Used}
+\begin{itemize}
+  \item \textbf{YOLOv8n} [3]: Nano version of YOLOv8 for object detection (6.3MB)
+  \item \textbf{YOLOv8s}: Small version for better accuracy (22MB)
+  \item Pre-trained on COCO dataset (80 classes)
+\end{itemize}
+
+\paragraph{Datasets}
+\begin{itemize}
+  \item \textbf{COCO Dataset} [4]: Common Objects in Context, used for pre-training
+  \item \textbf{Internal Dataset}: Collected using EYES data collector (confidential under NDA)
+\end{itemize}
+
+\paragraph{Libraries and Frameworks}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|p{0.25\textwidth}|p{0.20\textwidth}|p{0.45\textwidth}|}
+\hline
+\textbf{Library} & \textbf{Version} & \textbf{Purpose} \\
+\hline
+PyTorch & 2.0+ & Deep learning framework \\
+\hline
+Ultralytics & 8.0+ & YOLOv8 implementation \\
+\hline
+OpenCV & 4.8+ & Image processing, video handling \\
+\hline
+NumPy & 1.24+ & Numerical computations \\
+\hline
+\end{tabular}
+\captionof{table}{Libraries and frameworks used}
+\label{tab:libraries}
+\end{center}
+
 \subsection{State of the Art Study}
 
 \subsubsection{Speed Estimation Methods}
@@ -61,7 +96,7 @@ where $(x_i, y_i)$ are image coordinates and the world coordinates are obtained 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/homography_transform.png}
-\caption{Homography transformation from image coordinates to world coordinates. Four point correspondences are used to compute the $3 \times 3$ homography matrix.}
+\caption{Homography transformation from image coordinates to world coordinates [5] - Simplified diagram showing four point correspondences used to compute the $3 \times 3$ homography matrix for jury understanding.}
 \label{fig:homography}
 \end{figure}
 
@@ -124,7 +159,7 @@ where $\mathbf{v}$ is the velocity vector and $\mathbf{a}$ is the acceleration v
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/curvature_calculation.png}
-\caption{Curvature calculation from trajectory points showing velocity and acceleration vectors.}
+\caption{Curvature calculation from trajectory points showing velocity and acceleration vectors - Simplified diagram for jury understanding.}
 \label{fig:curvature}
 \end{figure}
 
@@ -144,6 +179,149 @@ An alternative approach estimates the angular rate directly from trajectory chan
 \end{equation}
 
 where $(v_x, v_y)$ and $(a_x, a_y)$ are the velocity and acceleration components. This formulation provides a direct estimate of the turning rate without explicit curvature computation.
+
+\subsubsection{Workflow Comparison}
+
+This section provides a comparative analysis of the four main approaches to speed estimation, examining their pipelines, advantages, limitations, and practical considerations.
+
+\paragraph{Pixel-Based Workflow}
+The pixel-based workflow represents the simplest approach to speed estimation, operating entirely in image coordinates without geometric transformation.
+
+\textbf{Pipeline}: Video → Detection → Centroid Tracking → Pixel Displacement → Speed
+
+The pixel-based method computes speed directly from centroid displacement between frames. While computationally efficient, this approach suffers from fundamental limitations:
+
+\begin{itemize}
+  \item \textbf{No perspective correction}: Objects at different distances from the camera have different pixel-to-world scale factors
+  \item \textbf{Scale varies with distance}: The same real-world speed produces different pixel displacements depending on object position
+  \item \textbf{No physical units}: Speed is reported in pixels per frame, which lacks physical meaning
+\end{itemize}
+
+\textbf{Use case}: Quick prototyping, non-critical applications where absolute accuracy is not required.
+
+\paragraph{Homography-Based Workflow (Our Implementation)}
+The homography-based workflow addresses the fundamental limitation of pixel-based methods by transforming image coordinates to a world coordinate system.
+
+\textbf{Pipeline}: Video → Detection → Tracking → Homography Transform → World Coordinates → Speed + Angle
+
+This approach offers several advantages over simpler methods:
+
+\begin{itemize}
+  \item \textbf{Perspective corrected}: The homography transformation accounts for the geometric relationship between the image plane and the ground plane
+  \item \textbf{Real-world units}: Speed is computed in meters per second, providing physically meaningful measurements
+  \item \textbf{Angle estimation}: Heading direction can be computed accurately in world coordinates
+  \item \textbf{Deterministic}: The transformation is mathematically well-defined and debuggable
+\end{itemize}
+
+\textbf{Requirements}: 4-point calibration, planar ground assumption. The calibration process requires marking four known points in the image and specifying their real-world coordinates.
+
+\paragraph{Optical Flow Workflow}
+Optical flow methods estimate motion by analyzing the apparent movement of brightness patterns between consecutive frames.
+
+\textbf{Pipeline}: Video → Feature Detection → Optical Flow → Motion Vectors → Aggregation → Speed
+
+Advantages of the optical flow approach include:
+
+\begin{itemize}
+  \item \textbf{Dense motion field}: Motion is estimated at every pixel, providing rich spatial information
+  \item \textbf{No explicit tracking needed}: The flow field captures motion without requiring object detection and tracking
+  \item \textbf{Sub-pixel accuracy}: Modern optical flow algorithms can estimate motion with sub-pixel precision
+\end{itemize}
+
+However, optical flow methods face several challenges:
+
+\begin{itemize}
+  \item \textbf{Illumination sensitive}: Changes in lighting can produce spurious flow vectors
+  \item \textbf{Aperture problem}: Local flow estimation is inherently ambiguous in homogeneous regions
+  \item \textbf{Calibration still required}: Converting flow to physical speed requires knowledge of scene geometry
+\end{itemize}
+
+\paragraph{Deep Learning Workflow}
+Deep learning approaches leverage neural networks to learn speed estimation directly from video data.
+
+\textbf{Pipeline}: Video Sequence → 3D CNN/Transformer → Speed Regression
+
+The deep learning workflow offers unique advantages:
+
+\begin{itemize}
+  \item \textbf{Learned features}: The network automatically discovers relevant features for speed estimation
+  \item \textbf{Handles complex scenarios}: Can potentially handle non-planar surfaces, occlusions, and unusual camera configurations
+  \item \textbf{End-to-end optimization}: The entire pipeline can be optimized jointly for the target task
+\end{itemize}
+
+Challenges with deep learning methods include:
+
+\begin{itemize}
+  \item \textbf{Training data required}: Large labeled datasets with ground truth speeds are necessary
+  \item \textbf{Computational overhead}: Neural network inference requires significant computational resources
+  \item \textbf{Black-box nature}: Difficult to debug and understand failure modes
+  \item \textbf{Domain adaptation}: Models trained on one scene may not generalize to different camera configurations
+\end{itemize}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|p{0.20\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.15\textwidth}|}
+\hline
+\textbf{Approach} & \textbf{Accuracy} & \textbf{Computational Cost} & \textbf{Calibration} & \textbf{Real-time} \\
+\hline
+Pixel-based & Low & Low & None & Yes \\
+\hline
+Homography (ours) & High & Medium & 4-point & Yes \\
+\hline
+Optical Flow & Medium & Medium & Required & Marginal \\
+\hline
+Deep Learning & High & High & Learned & Hardware-dependent \\
+\hline
+\end{tabular}
+\captionof{table}{Comparison of speed estimation workflows}
+\label{tab:workflow-comparison}
+\end{center}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/workflow_comparison.png}
+\caption{Comparison of speed estimation workflows showing the data flow and components of each approach - Simplified diagram for jury understanding.}
+\label{fig:workflow-comparison}
+\end{figure}
+
+\subsubsection{Comparison with Existing Solutions}
+
+This section compares our implementation with existing speed estimation solutions in the literature and industry.
+
+\paragraph{Ultralytics YOLO Speed Estimation [1]}
+The Ultralytics YOLO framework provides a built-in speed estimation module that uses a simplified approach for converting pixel measurements to real-world units:
+
+\begin{itemize}
+  \item \textbf{Scale conversion}: Uses a \texttt{meter\_per\_pixel} parameter for linear pixel-to-meter conversion
+  \item \textbf{No perspective correction}: Simple linear scaling without homography matrix transformation
+  \item \textbf{Limited output}: Provides speed estimation only, with no angle or heading information
+  \item \textbf{Tracking method}: Uses centroid tracking for position estimation
+\end{itemize}
+
+This approach is suitable for scenarios with minimal perspective distortion but lacks the geometric accuracy provided by homography-based methods.
+
+\paragraph{OpenCV-based Approaches [2]}
+Traditional OpenCV-based speed estimation implementations typically employ straightforward distance calculations:
+
+\begin{itemize}
+  \item \textbf{Distance formulas}: Often use simple Euclidean distance between detected object centroids
+  \item \textbf{Manual calibration}: Require manual specification of scale factors without automatic perspective correction
+  \item \textbf{Limited scope}: Focus primarily on speed estimation without angle or heading capabilities
+  \item \textbf{No smoothing}: Generally lack temporal filtering for noise reduction
+\end{itemize}
+
+These approaches prioritize simplicity over accuracy and do not address the full range of motion analysis requirements.
+
+\paragraph{Our Implementation Advantages}
+The implemented solution offers several advantages over existing approaches:
+
+\begin{itemize}
+  \item \textbf{Full homography transformation}: Proper perspective correction using a $3 \times 3$ homography matrix calibrated from four point correspondences [5]
+  \item \textbf{Dual estimation}: Provides both speed AND angle/heading estimation in world coordinates
+  \item \textbf{Curvature-based analysis}: Implements turning metrics including curvature and angular rate computation
+  \item \textbf{EMA smoothing}: Applies exponential moving average filtering to reduce measurement noise
+  \item \textbf{Physical constraints}: Enforces realistic acceleration and turn rate limits to reject implausible estimates
+\end{itemize}
 
 \subsection{Design Diagrams For Sprint 1}
 
@@ -176,7 +354,7 @@ The implementation consists of the following core modules:
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/speed_estimation_workflow.png}
-\caption{Speed estimation pipeline workflow showing data flow from video frames to speed output.}
+\caption{Speed estimation pipeline workflow showing data flow from video frames to speed output - Simplified diagram for jury understanding.}
 \label{fig:workflow}
 \end{figure}
 
@@ -200,7 +378,7 @@ A key feature of the implemented pipeline is the trajectory dot system, which pr
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/trajectory_analysis.png}
-\caption{Trajectory analysis with dot visualization system showing motion history.}
+\caption{Trajectory analysis with dot visualization system showing motion history - Simplified diagram for jury understanding.}
 \label{fig:trajectory}
 \end{figure}
 
@@ -218,6 +396,26 @@ The trajectory dot system serves multiple purposes:
   \item Assessment of trajectory smoothness and noise characteristics
   \item Debugging support for speed and angle estimation issues
   \item Presentation of motion history to operators
+\end{itemize}
+
+\subsubsection{Diagram Legend}
+
+To facilitate understanding of the diagrams presented in this chapter, the following legend explains the visual elements used:
+
+\paragraph{Visual Elements}
+\begin{itemize}
+  \item \textbf{Dots}: Represent trajectory points in world coordinates. Each dot corresponds to a recorded position of a tracked object at a specific timestamp.
+  \item \textbf{Arrows}: Represent velocity vectors. The arrow direction indicates the heading of the object, and the length is proportional to the speed.
+  \item \textbf{Curved lines}: Represent curvature calculation paths. These show the local trajectory segment used for computing curvature and angular rate.
+  \item \textbf{Angles}: Computed using the $\arctan2$ formula, which provides the four-quadrant inverse tangent to determine heading direction from displacement components.
+\end{itemize}
+
+\paragraph{Coordinate Systems}
+All diagrams use a right-handed coordinate system where:
+\begin{itemize}
+  \item The $X$-axis points to the right in the world frame
+  \item The $Y$-axis points upward (or forward in the top-down view)
+  \item Angles are measured counter-clockwise from the positive $X$-axis
 \end{itemize}
 
 \subsubsection{Mathematical Foundations}
@@ -266,7 +464,7 @@ where $S_t$ is the smoothed value at time $t$, $X_t$ is the raw input value, and
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/speed_smoothing.png}
-\caption{Effect of EMA smoothing on speed estimates comparing raw and filtered values.}
+\caption{Effect of EMA smoothing on speed estimates comparing raw and filtered values - Simplified diagram for jury understanding.}
 \label{fig:smoothing}
 \end{figure}
 
@@ -354,6 +552,15 @@ The speed and angle estimation pipeline exposes several configuration parameters
 \captionof{table}{Configuration parameters for speed and angle estimation}
 \label{tab:config-params}
 \end{center}
+
+\subsection{References}
+\begin{enumerate}
+  \item Ultralytics, "Speed Estimation with YOLO", https://docs.ultralytics.com/fr/guides/speed-estimation/
+  \item OpenCV Documentation, "Motion Analysis and Object Tracking"
+  \item Ultralytics, "YOLOv8 Models", https://docs.ultralytics.com/models/yolov8/
+  \item COCO Dataset, https://cocodataset.org/
+  \item Zhang et al., "2D Homography for Traffic Data Collection", arXiv:2401.07220
+\end{enumerate}
 
 \section{Conclusion}
 This chapter presented the work accomplished during Sprint 1, focusing on speed and angle estimation for tracked objects within the EYES video analytics framework. The implemented pipeline combines homography-based coordinate transformation, trajectory-based speed computation, curvature-derived heading estimation, and EMA smoothing to produce robust and physically meaningful estimates.

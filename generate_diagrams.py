@@ -463,6 +463,75 @@ def create_speed_smoothing():
     plt.close()
     return output_path
 
+def create_workflow_comparison():
+    fig, axes = plt.subplots(2, 2, figsize=(16, 12))
+    
+    def draw_workflow(ax, steps, title, highlight=False):
+        ax.set_xlim(0, 10)
+        ax.set_ylim(0, 4)
+        ax.axis('off')
+        
+        if highlight:
+            for spine in ax.spines.values():
+                spine.set_visible(True)
+                spine.set_color('#27AE60')
+                spine.set_linewidth(4)
+            ax.set_facecolor('#E8F8F5')
+        
+        n_steps = len(steps)
+        box_width = 1.4
+        gap = (10 - n_steps * box_width) / (n_steps + 1)
+        
+        for i, step in enumerate(steps):
+            x = gap + i * (box_width + gap) + box_width / 2
+            y = 2
+            
+            color = '#AED6F1' if i == 0 else ('#D7BDE2' if i == n_steps - 1 else '#F9E79F')
+            
+            box = FancyBboxPatch((x - box_width/2, y - 0.5), box_width, 1,
+                                 boxstyle="round,pad=0.05,rounding_size=0.1",
+                                 facecolor=color, edgecolor='black', linewidth=1.5)
+            ax.add_patch(box)
+            ax.text(x, y, step, ha='center', va='center', fontsize=9, fontweight='bold')
+            
+            if i < n_steps - 1:
+                next_x = gap + (i + 1) * (box_width + gap) + box_width / 2
+                ax.annotate('', xy=(next_x - box_width/2 - 0.05, y),
+                           xytext=(x + box_width/2 + 0.05, y),
+                           arrowprops=dict(arrowstyle='->', color='#1A5276', lw=2))
+        
+        title_color = '#27AE60' if highlight else 'black'
+        title_fontweight = 'bold'
+        title_text = title if not highlight else title
+        ax.text(5, 3.5, title_text, ha='center', va='center', fontsize=13, 
+                fontweight=title_fontweight, color=title_color)
+        
+        if highlight:
+            ax.text(5, 0.5, '*** Our Implementation ***', ha='center', va='center', 
+                   fontsize=11, fontweight='bold', color='#27AE60',
+                   bbox=dict(boxstyle='round', facecolor='#D5F5E3', edgecolor='#27AE60', linewidth=2))
+    
+    pixel_steps = ['Video\nFrame', 'Detection', 'Centroid', 'Pixel\nDisplacement', 'Speed\n(px/frame)']
+    draw_workflow(axes[0, 0], pixel_steps, 'Pixel-Based')
+    
+    homography_steps = ['Video\nFrame', 'Detection', 'Tracking', 'Homography', 'World\nCoords', 'Speed +\nAngle']
+    draw_workflow(axes[0, 1], homography_steps, 'Homography-Based (Ours)', highlight=True)
+    
+    optical_steps = ['Video\nFrame', 'Features', 'Optical\nFlow', 'Motion\nVectors', 'Speed']
+    draw_workflow(axes[1, 0], optical_steps, 'Optical Flow')
+    
+    dl_steps = ['Video\nSequence', '3D CNN', 'Speed\nRegression']
+    draw_workflow(axes[1, 1], dl_steps, 'Deep Learning')
+    
+    plt.suptitle('Speed Estimation Workflows Comparison', fontsize=16, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=(0, 0, 1, 0.96))
+    
+    output_path = os.path.join(OUTPUT_DIR, 'workflow_comparison.png')
+    plt.savefig(output_path, bbox_inches='tight', facecolor='white')
+    plt.savefig(output_path.replace('.png', '.svg'), bbox_inches='tight', facecolor='white')
+    plt.close()
+    return output_path
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
@@ -484,6 +553,9 @@ def main():
     
     print("5. Creating speed smoothing diagram...")
     paths.append(create_speed_smoothing())
+    
+    print("6. Creating workflow comparison diagram...")
+    paths.append(create_workflow_comparison())
     
     print("\n" + "="*60)
     print("Generated files:")
