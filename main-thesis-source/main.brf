@@ -1,0 +1,8 @@
+\backcite {ref:crisp-dm}{{12}{1}{section.2.1}}
+\backcite {ref:labelstudio}{{14}{5}{section.2.5}}
+\backcite {ref:efficientnet, ref:yolov8}{{16}{6}{section.2.6}}
+\backcite {ref:roboflow}{{18}{7}{section.2.7}}
+\backcite {ref:groundingdino}{{41}{2.2}{subsection.5.2.2}}
+\backcite {ref:groundingdino}{{41}{2.3}{subsection.5.2.3}}
+\backcite {ref:yoloworld}{{41}{2.3}{subsection.5.2.3}}
+\backcite {ref:onnx}{{43}{3.3}{subsection.5.3.3}}

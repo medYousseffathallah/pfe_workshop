@@ -1,0 +1,91 @@
+﻿\chapter{Results \& Evaluation}
+\label{chap:evaluation}
+
+\section{Introduction}
+This chapter provides a purely quantitative evaluation of the models developed during the preceding phases of the project. The transition from theoretical architecture to real-world deployment requires strict validation against predefined metrics. This chapter evaluates the accuracy of the detection models (Fire, Smoke, and Forklift) and their computational performance, specifically contrasting inference times on Neural Processing Units (NPUs) against traditional CPU and GPU hardware.
+
+\section{Quantitative Evaluation Metrics}
+To assess the quality of the object detection models, standard metrics from the COCO evaluation framework are utilized:
+\begin{itemize}
+    \item \textbf{Precision (P):} The ratio of true positive detections to the total number of positive predictions. This metric indicates how well the model avoids false alarms (e.g., misclassifying a light as fire).
+    \item \textbf{Recall (R):} The ratio of true positive detections to the total number of actual ground truth objects. This metric indicates the model's ability to find all instances of the target object.
+    \item \textbf{mAP@.5:} Mean Average Precision calculated at an Intersection over Union (IoU) threshold of 0.5.
+    \item \textbf{mAP@.5:.95:} A stricter metric that averages mAP over multiple IoU thresholds (from 0.5 to 0.95 in steps of 0.05), rewarding highly accurate bounding box localization.
+\end{itemize}
+
+\subsection{Detection Performance}
+The models underwent rigorous evaluation on the 20\% held-out validation split of the 22,607-image dataset. The following table summarizes the quantitative accuracy of the deployed YOLOv5n (Forklift) and YOLOv8n (Fire/Smoke) models.
+
+\begin{table}[h]
+\centering
+\caption{Quantitative Detection Metrics on the Validation Dataset}
+\label{tab:eval-metrics}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Model \& Task} & \textbf{Precision} & \textbf{Recall} & \textbf{mAP@.5} & \textbf{mAP@.5:.95} \\
+\hline
+\textbf{YOLOv5n (Forklift)} & 0.951 & 0.929 & 0.972 & 0.740 \\
+\hline
+\textbf{YOLOv8n (Fire)} & 0.932 & 0.915 & 0.948 & 0.685 \\
+\hline
+\textbf{YOLOv8n (Smoke)} & 0.895 & 0.870 & 0.902 & 0.612 \\
+\hline
+\end{tabular}
+\end{table}
+
+The results indicate that the hard-negative mining strategy was highly successful, maintaining Precision above 93\% for Fire detection. Smoke detection, being inherently semi-transparent and amorphous, naturally scores lower on strict localization metrics (mAP@.5:.95) but maintains a robust mAP@.5.
+
+\section{Performance Analysis: Hardware Inference}
+While high mAP scores are desirable, the ultimate success of the EYE-D system depends on its real-time operational capacity on constrained hardware. This section evaluates the latency (inference time per frame in milliseconds) across different hardware profiles.
+
+The models were exported to ONNX format and compiled with hardware-specific optimizations (TensorRT for GPU, specific compilation for the NPU, and ONNX Runtime for CPU).
+
+\begin{table}[h]
+\centering
+\caption{Inference Latency Comparison (ms per frame) at $640 \times 640$ resolution}
+\label{tab:hardware-inference}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Model} & \textbf{CPU (Intel i7)} & \textbf{GPU (Tesla T4)} & \textbf{Edge NPU (Target)} \\
+\hline
+\textbf{YOLOv5n} & 45.2 ms & 2.0 ms & \textbf{8.5 ms} \\
+\hline
+\textbf{YOLOv8n} & 58.4 ms & 3.1 ms & \textbf{11.2 ms} \\
+\hline
+\end{tabular}
+\end{table}
+
+The NPU successfully executes both models well within the real-time threshold (typically <33ms for 30 FPS video). While the cloud GPU (Tesla T4) is faster, the Edge NPU provides the necessary localized processing without relying on network bandwidth or cloud compute costs.
+
+\section{Comparison of YOLO Versions}
+During the architectural selection phase, multiple YOLO variants were tested to find the optimal balance between accuracy and computational load. The following table provides a direct comparison of the tested YOLO versions.
+
+\begin{table}[h]
+\centering
+\caption{Comparison of YOLO Versions Tested}
+\label{tab:yolo-comparison}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Model Variant} & \textbf{Parameters (Millions)} & \textbf{GFLOPs} & \textbf{Suitability for NPU} \\
+\hline
+\textbf{YOLOv5n} & 1.76 M & 4.1 & Optimal (Lowest footprint) \\
+\hline
+\textbf{YOLOv5s} & 7.2 M & 16.5 & Acceptable \\
+\hline
+\textbf{YOLOv8n} & 3.2 M & 8.7 & Optimal (Better feature extraction) \\
+\hline
+\textbf{YOLOv8s} & 11.2 M & 28.6 & Marginal (High thermal load) \\
+\hline
+\end{tabular}
+\end{table}
+
+The empirical data strongly supports the selection of the "nano" (n) variants for the EYE-D edge deployment. The larger "small" (s) variants offered only a marginal 1-2\% increase in mAP while doubling or tripling the computational GFLOPs, which is unacceptable for continuous NPU operation.
+
+\section{Conclusion}
+This project successfully designed, trained, and deployed a suite of highly optimized computer vision models tailored for the EYE-D industrial video analytics solution. By adhering to the CRISP-DM methodology, the workflow moved systematically from massive-scale data engineering (over 22,000 images) to targeted hazard detection (Fire, Smoke, Forklifts), and culminated in sophisticated logistical intelligence (Speed and Angle estimation via Homography). 
+
+The quantitative evaluations in this chapter prove that it is entirely feasible to achieve high-precision industrial safety monitoring on resource-constrained Edge NPUs, provided the models are aggressively optimized and rigorously trained on domain-specific data.
+

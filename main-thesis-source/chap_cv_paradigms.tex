@@ -1,0 +1,31 @@
+﻿% This file is \input'd into chap1.tex as a section
+\section{State of the Art: Detection and Deployment Paradigms}
+\label{sec:cv-paradigms}
+
+This section establishes the technical foundations required to justify the architectural and methodological choices in the EYE-D project. The focus is strictly limited to NPU compatibility, neural network structure, and the mathematical framework enabling physical measurement.
+
+\subsection{Foundations of Computer Vision and Supervised Learning}
+In the context of industrial safety, Computer Vision fundamentally bifurcates into two distinct but sequential tasks: Object Detection, which localizes and classifies entities within a single spatial frame, and Object Tracking, which associates these spatial detections across temporal sequences to maintain a persistent identity. To achieve the high reliability required for safety-critical environments, these systems rely on Supervised Learning. This paradigm mandates training the neural network on vast quantities of meticulously annotated data, ensuring the model learns deterministic, mathematically bounded representations of hazards like fire or moving forklifts rather than relying on unpredictable heuristics.
+
+\subsection{Evaluation Metrics and the COCO Dataset}
+The baseline capability of modern detection models is universally benchmarked against the COCO (Common Objects in Context) dataset, a large-scale collection of images spanning 80 diverse object categories. Performance on such datasets is quantified using Mean Average Precision (mAP), an evaluation metric that calculates the area under the Precision-Recall curve across multiple Intersection over Union (IoU) thresholds. In edge deployments, mAP serves as the primary counterbalance to Frames Per Second (FPS), dictating the acceptable trade-off between localization accuracy and real-time execution speed.
+
+\subsection{Why YOLO is the Optimal Choice for Edge-AI and NPUs}
+In the context of Edge-AI, models must balance detection accuracy against strict latency and memory constraints imposed by Neural Processing Units (NPUs). Single-stage detectors like the YOLO (You Only Look Once) family are the industry standard for this task. They predict object categories and bounding box coordinates simultaneously in a single forward pass, avoiding the computational overhead of region-proposal networks found in two-stage models. This single-stage architecture sacrifices a marginal amount of peak accuracy in exchange for significantly higher FPS and lower inference latency. Furthermore, the mature Ultralytics ecosystem allows YOLO models to be seamlessly exported to interoperable formats like ONNX and compiled into TensorRT engines, directly satisfying NPU deployment requirements.
+
+\subsection{Defining the Neural Network Backbone}
+In a convolutional neural network, the backbone functions as the primary feature-extracting engine, systematically downsampling raw input pixels into rich, multi-scale semantic representations. Architectures like CSPNet (Cross Stage Partial Network) partition feature maps to reduce redundant gradient calculations, making the backbone lightweight and exceptionally efficient for real-time inference. For NPU deployments, optimizing this backbone is the most vital step in preventing computational bottlenecks and maintaining real-time execution at the edge.
+
+\subsection{Tooling for Data Engineering: Label Studio and Roboflow}
+The accuracy of supervised learning models is inextricably linked to the quality of their underlying datasets. Modern data engineering relies on specialized tooling to manage the dataset lifecycle. \textbf{Label Studio} is widely adopted for computer-assisted annotation, providing a flexible interface for human annotators to correct pre-generated bounding boxes, significantly accelerating the labeling process. Conversely, \textbf{Roboflow} serves as the industry standard for dataset versioning, augmentation, and analytics, allowing engineers to track class distributions and dataset health over time. 
+
+\subsection{The YOLO Annotation Format}
+To ensure interoperability between annotation tools and training pipelines, bounding box data must be standardized. The YOLO Annotation Format represents each object as a single line in a text file:
+\begin{equation}
+<class\_id>\ <x\_center>\ <y\_center>\ <width>\ <height>
+\end{equation}
+A critical feature of this format is that all spatial coordinates are normalized as percentages of the image dimensions (values between 0.0 and 1.0). This normalization is essential for robust machine learning operations; it allows the neural network to dynamically handle and resize images of vastly different resolutions during training and inference without the need to mathematically recalculate or re-label the bounding boxes.
+
+
+
+

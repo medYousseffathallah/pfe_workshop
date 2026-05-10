@@ -1,0 +1,60 @@
+# LaTeX Source Files
+main.tex - Main entry point configuring document structure, packages, and importing chapters.
+abbreviations.tex - List of abbreviations and acronyms.
+chap1.tex - Chapter 1 (Introduction and context).
+chap2_data.tex - Chapter 2 (Data preparation and analysis).
+chap3_safety.tex - Chapter 3 (Safety systems, fire detection).
+chap4_logistics.tex - Chapter 4 (Logistics tracking, forklifts, speed).
+chap5_zeroshot.tex - Chapter 5 (Zero-shot approaches and fallbacks).
+bibliography.tex - Bibliography and references definitions.
+chap_cv_paradigms.tex - Sub-chapter on CV paradigms, imported by chap1.tex.
+chap_yolov5_justification.tex - Sub-chapter justifying YOLOv5, imported by chap4_logistics.tex.
+chap_yolov8_architecture.tex - Sub-chapter on YOLOv8 architecture, imported by chap4_logistics.tex.
+
+# Title Page Assets
+extracted_images/Im1.jpg - Left logo for the title page.
+extracted_images/Im2.png - Right logo for the title page.
+extracted_images/Im3.png - Middle band image for the title page.
+
+# Chapter 1 Images
+images/in2technologies_logo.jpg - Company logo.
+images/eye_d_logo.jpg - Product/Company logo.
+diagrams/crisp_dm.png - Diagram illustrating the CRISP-DM methodology.
+
+# Chapter 2 Images
+dataannotationimages/labelstudio.png - Screenshot of the Label Studio interface.
+dataannotationimages/exampleofannotatedimagewith10+labels.png - Example of an annotated dataset image.
+dataannotationimages/data analysis.png - Chart showing data analysis metrics.
+
+# Chapter 3 Images
+images/fake_fire_testlight.jpg - Test image for fire detection under artificial light.
+images/oldversion_firetest_annotated.jpg - Annotated test result of fire detection.
+
+# Chapter 4 Images
+images/forklift_data_pipeline.png - Diagram of the forklift data pipeline.
+images/forklift_training_pipeline.png - Diagram of the forklift training pipeline.
+images/forklifttest.png - Result of forklift detection testing.
+images/homography_transform.png - Diagram explaining the homography transformation.
+images/workflow_comparison.png - Workflow comparison chart.
+images/system_architecture.pdf - Vector diagram of the overall system architecture.
+images/speed_estimation_workflow.png - Workflow diagram for speed estimation.
+images/speedcaroverlay.png - Overlay image showing speed estimation on a vehicle.
+images/speed_smoothing.png - Graph showing speed smoothing techniques.
+diagrams/architecture.png - Architecture diagram.
+diagrams/fig6_c2f_vs_c3.png - Diagram comparing C2f and C3 modules.
+diagrams/fig7_decoupled_head.png - Diagram of the decoupled head architecture.
+diagrams/fig8_yolov8_scaling.png - Scaling properties diagram of YOLOv8.
+diagrams/fig10_params_comparison.png - Comparison of model parameters.
+diagrams/fig12_decision_flowchart.png - Decision flowchart diagram.
+diagrams/fig11_flops_comparison.png - Comparison of FLOPs across models.
+
+# Chapter 5 Images
+images/fallback_new.png - Fallback detection mechanism diagram.
+images/shelf1_annotated.jpg - Annotated image of a retail shelf (1).
+images/shelf3_annotated.jpg - Annotated image of a retail shelf (3).
+images/shelf4_annotated.jpg - Annotated image of a retail shelf (4).
+
+# Compilation Instructions
+Engine: xelatex
+Command: xelatex -interaction=nonstopmode main.tex
+Note: Run the command twice to resolve table of contents and references properly.
