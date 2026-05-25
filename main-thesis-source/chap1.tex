@@ -1,4 +1,4 @@
-﻿\chapter{Introduction}
+﻿\chapter{PROJECT OVERVIEW AND REQUIREMENTS ANALYSIS}
 \setcounter{section}{0}
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -117,7 +117,7 @@ Several solution strategies are commonly adopted to deliver computer vision capa
 \begin{itemize}
   \item \textbf{Cloud-centric processing}: cameras stream data to a server or cloud environment that runs inference, then returns results to client applications.
   \item \textbf{Edge computing with accelerators}: inference is executed close to the cameras on embedded devices equipped with GPUs or NPUs, reducing latency and dependency on connectivity.
-  \item \textbf{Standardized model exchange and deployment tooling}: workflows often rely on interoperable formats (e.g., ONNX) and on optimization toolchains (quantization, pruning, operator fusion) to obtain deployable artifacts.
+  \item \textbf{Standardized model exchange and deployment tooling}: workflows often rely on interoperable formats (e.g., ONNX \cite{ref:onnx}) and on optimization toolchains (quantization, pruning, operator fusion) to obtain deployable artifacts.
   \item \textbf{Modular analytics pipelines}: products typically combine multiple specialized models (detection, tracking, classification) orchestrated to produce higher-level events.
 \end{itemize}
 
@@ -147,12 +147,12 @@ Before analyzing the quantitative performance of the implemented models in the s
 Both the logistical optimization phase (Forklift Detection and Speed Estimation) and the industrial safety phase (Fire and Smoke Detection) cycled through the following six CRISP-DM steps:
 
 \begin{itemize}
-    \item \textbf{Step 1: Business Understanding:} We defined the core operational needs for the EYE-D system. For the logistical optimization phase, the objective was optimizing warehouse logistics and traffic management via Forklift tracking and speed estimation. For the safety phase, the focus shifted to industrial safety, requiring real-time fire and smoke detection to trigger immediate emergency alerts.
-    \item \textbf{Step 2: Data Understanding:} High-quality data acquisition was critical. The first phase utilized a custom, curated Forklift dataset to address the absence of industrial vehicles in standard COCO datasets. The safety phase leveraged the HuggingFace \texttt{fire-smoke-hardnegatives-int8} dataset, emphasizing the need to understand environmental hazards and challenging lighting conditions.
-    \item \textbf{Step 3: Data Preparation:} Advanced data augmentations were applied to ensure generalization in real-world industrial environments. For both phases, techniques such as Mosaic and Mixup were integrated. Crucially, the safety phase incorporated hard-negative mining to actively reduce false positives (e.g., misclassifying steam or reflections as fire).
-    \item \textbf{Step 4: Modeling:} Architecture selection was strictly guided by NPU hardware constraints. For the first phase, YOLOv5 was chosen for its proven low-latency NPU optimization. For the safety phase, YOLOv8n was selected to leverage its advanced multi-scale feature extraction while remaining compact enough for edge deployment.
-    \item \textbf{Step 5: Evaluation:} Models were evaluated quantitatively using industry-standard metrics. We balanced Mean Average Precision (mAP) for detection accuracy against Frames Per Second (FPS) to validate real-time execution capabilities on the target NPU platform.
-    \item \textbf{Step 6: Deployment:} The final PyTorch models from both phases were exported to ONNX format, ensuring cross-platform interoperability. These ONNX artifacts were then compiled into optimized inference engines and deployed directly onto the edge NPU, fulfilling the project's strict latency and privacy requirements.
+    \item \textbf{1. Business Understanding:} We defined the core operational needs for the EYE-D system. For the logistical optimization phase, the objective was optimizing warehouse logistics and traffic management via Forklift tracking and speed estimation. For the safety phase, the focus shifted to industrial safety, requiring real-time fire and smoke detection to trigger immediate emergency alerts.
+    \item \textbf{2. Data Understanding:} High-quality data acquisition was critical. The first phase utilized a custom, curated Forklift dataset to address the absence of industrial vehicles in standard COCO datasets. The safety phase leveraged the HuggingFace \texttt{fire-smoke-hardnegatives-int8} dataset, emphasizing the need to understand environmental hazards and challenging lighting conditions.
+    \item \textbf{3. Data Preparation:} Advanced data augmentations were applied to ensure generalization in real-world industrial environments. For both phases, techniques such as Mosaic and Mixup were integrated. Crucially, the safety phase incorporated hard-negative mining to actively reduce false positives (e.g., misclassifying steam or reflections as fire).
+    \item \textbf{4. Modeling:} Architecture selection was strictly guided by NPU hardware constraints. For the first phase, YOLOv5 was chosen for its proven low-latency NPU optimization. For the safety phase, YOLOv8n was selected to leverage its advanced multi-scale feature extraction while remaining compact enough for edge deployment.
+    \item \textbf{5. Evaluation:} Models were evaluated quantitatively using industry-standard metrics. We balanced Mean Average Precision (mAP) for detection accuracy against Frames Per Second (FPS) to validate real-time execution capabilities on the target NPU platform.
+    \item \textbf{6. Deployment:} The final PyTorch models from both phases were exported to ONNX format, ensuring cross-platform interoperability. These ONNX artifacts were then compiled into optimized inference engines and deployed directly onto the edge NPU, fulfilling the project's strict latency and privacy requirements.
 \end{itemize}
 
 As illustrated in Figure~\ref{fig:methodology}, the project methodology is governed by a circular CRISP-DM lifecycle that ensures rigorous technical execution across all steps. This framework specifically accommodates an iterative feedback loop between the evaluation and data preparation stages. Such a loop was essential for implementing Hard-Negative Mining in the Fire/Smoke dataset, allowing the system to continuously refine its understanding of challenging environmental artifacts and reduce false positive alerts.

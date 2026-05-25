@@ -1,4 +1,4 @@
-﻿% This file is \input'd into chap1.tex as a section
+% This file is \input'd into chap1.tex as a section
 \section{State of the Art: Detection and Deployment Paradigms}
 \label{sec:cv-paradigms}
 
@@ -8,16 +8,49 @@ This section establishes the technical foundations required to justify the archi
 In the context of industrial safety, Computer Vision fundamentally bifurcates into two distinct but sequential tasks: Object Detection, which localizes and classifies entities within a single spatial frame, and Object Tracking, which associates these spatial detections across temporal sequences to maintain a persistent identity. To achieve the high reliability required for safety-critical environments, these systems rely on Supervised Learning. This paradigm mandates training the neural network on vast quantities of meticulously annotated data, ensuring the model learns deterministic, mathematically bounded representations of hazards like fire or moving forklifts rather than relying on unpredictable heuristics.
 
 \subsection{Evaluation Metrics and the COCO Dataset}
-The baseline capability of modern detection models is universally benchmarked against the COCO (Common Objects in Context) dataset, a large-scale collection of images spanning 80 diverse object categories. Performance on such datasets is quantified using Mean Average Precision (mAP), an evaluation metric that calculates the area under the Precision-Recall curve across multiple Intersection over Union (IoU) thresholds. In edge deployments, mAP serves as the primary counterbalance to Frames Per Second (FPS), dictating the acceptable trade-off between localization accuracy and real-time execution speed.
+The baseline capability of modern detection models is universally benchmarked against the COCO (Common Objects in Context) dataset \cite{ref:coco}, a large-scale collection of images spanning 80 diverse object categories. Performance on such datasets is quantified using Mean Average Precision (mAP), an evaluation metric that calculates the area under the Precision-Recall curve across multiple Intersection over Union (IoU) thresholds.
 
-\subsection{Why YOLO is the Optimal Choice for Edge-AI and NPUs}
+To formally evaluate model accuracy, the following standard metrics are defined:
+\begin{itemize}
+    \item \textbf{Precision (P):} The ratio of true positive detections to the total number of positive predictions.
+    \begin{equation}
+        P = \frac{TP}{TP + FP}
+    \end{equation}
+    \item \textbf{Recall (R):} The ratio of true positive detections to the total number of actual ground truth objects.
+    \begin{equation}
+        R = \frac{TP}{TP + FN}
+    \end{equation}
+    \item \textbf{mAP@.5:} Mean Average Precision calculated at an Intersection over Union (IoU) threshold of 0.5.
+    \item \textbf{mAP@.5:.95:} A stricter metric that averages mAP over multiple IoU thresholds (from 0.5 to 0.95 in steps of 0.05).
+\end{itemize}
+
+In edge deployments, mAP serves as the primary counterbalance to Frames Per Second (FPS), dictating the acceptable trade-off between localization accuracy and real-time execution speed.
+
+\subsection{YOLO as the Optimal Choice for Edge-AI and NPUs}
 In the context of Edge-AI, models must balance detection accuracy against strict latency and memory constraints imposed by Neural Processing Units (NPUs). Single-stage detectors like the YOLO (You Only Look Once) family are the industry standard for this task. They predict object categories and bounding box coordinates simultaneously in a single forward pass, avoiding the computational overhead of region-proposal networks found in two-stage models. This single-stage architecture sacrifices a marginal amount of peak accuracy in exchange for significantly higher FPS and lower inference latency. Furthermore, the mature Ultralytics ecosystem allows YOLO models to be seamlessly exported to interoperable formats like ONNX and compiled into TensorRT engines, directly satisfying NPU deployment requirements.
 
 \subsection{Defining the Neural Network Backbone}
-In a convolutional neural network, the backbone functions as the primary feature-extracting engine, systematically downsampling raw input pixels into rich, multi-scale semantic representations. Architectures like CSPNet (Cross Stage Partial Network) partition feature maps to reduce redundant gradient calculations, making the backbone lightweight and exceptionally efficient for real-time inference. For NPU deployments, optimizing this backbone is the most vital step in preventing computational bottlenecks and maintaining real-time execution at the edge.
+In a convolutional neural network, the backbone functions as the primary feature-extracting engine, systematically downsampling raw input pixels into rich, multi-scale semantic representations. Architectures like CSPNet (Cross Stage Partial Network) \cite{ref:cspnet} partition feature maps to reduce redundant gradient calculations, making the backbone lightweight and exceptionally efficient for real-time inference. For NPU deployments, optimizing this backbone is the most vital step in preventing computational bottlenecks and maintaining real-time execution at the edge.
 
 \subsection{Tooling for Data Engineering: Label Studio and Roboflow}
-The accuracy of supervised learning models is inextricably linked to the quality of their underlying datasets. Modern data engineering relies on specialized tooling to manage the dataset lifecycle. \textbf{Label Studio} is widely adopted for computer-assisted annotation, providing a flexible interface for human annotators to correct pre-generated bounding boxes, significantly accelerating the labeling process. Conversely, \textbf{Roboflow} serves as the industry standard for dataset versioning, augmentation, and analytics, allowing engineers to track class distributions and dataset health over time. 
+The accuracy of supervised learning models is inextricably linked to the quality of their underlying datasets. Modern data engineering relies on specialized tooling to manage the dataset lifecycle. \textbf{Label Studio} \cite{ref:labelstudio} is widely adopted for computer-assisted annotation, providing a flexible interface for human annotators to correct pre-generated bounding boxes, significantly accelerating the labeling process. Conversely, \textbf{Roboflow} \cite{ref:roboflow} serves as the industry standard for dataset versioning, augmentation, and analytics, allowing engineers to track class distributions and dataset health over time.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{dataannotationimages/labelstudiologo.png}
+\caption{Label Studio}
+\label{fig:labelstudio}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{dataannotationimages/roboflowlogo.png}
+\caption{Roboflow}
+\label{fig:roboflow}
+\end{minipage}
+\end{figure} 
 
 \subsection{The YOLO Annotation Format}
 To ensure interoperability between annotation tools and training pipelines, bounding box data must be standardized. The YOLO Annotation Format represents each object as a single line in a text file:

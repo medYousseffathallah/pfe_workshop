@@ -1,3 +1,8 @@
+\backcite {ref:coco}{{7}{3.2}{subsection.1.3.2}}
+\backcite {ref:cspnet}{{8}{3.4}{subsection.1.3.4}}
+\backcite {ref:labelstudio}{{8}{3.5}{subsection.1.3.5}}
+\backcite {ref:roboflow}{{8}{3.5}{subsection.1.3.5}}
+\backcite {ref:onnx}{{9}{4}{section.1.4}}
 \backcite {ref:crisp-dm}{{12}{1}{section.2.1}}
 \backcite {ref:labelstudio}{{14}{5}{section.2.5}}
 \backcite {ref:efficientnet, ref:yolov8}{{16}{6}{section.2.6}}
