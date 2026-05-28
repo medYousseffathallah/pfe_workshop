@@ -1,0 +1,31 @@
+\chapter*{General Introduction}
+\addcontentsline{toc}{chapter}{General Introduction}
+
+\section*{Establishment}
+The rapid advancement of Artificial Intelligence, particularly in Computer Vision (CV), has transformed how industries monitor, secure, and optimize their operations. However, deploying these advanced models in real-world industrial environments often requires a strategic shift from cloud-centric processing to Edge-AI architectures. This shift is essential to ensure real-time responsiveness, minimize bandwidth dependency, and maintain strict data confidentiality.
+
+This transition introduces significant engineering challenges. Neural Processing Units (NPUs)—specialized hardware accelerators designed for embedded edge devices—impose severe constraints on memory (SRAM), compute budgets, and latency. Deploying robust CV models under these conditions requires carefully balancing localization accuracy with real-time execution speeds, all while navigating the strict architectural requirements of the target hardware.
+
+In this context, our project, developed within \textbf{in2-Technologies}, aims to design and implement an end-to-end workflow for producing and deploying optimized computer vision models for the \textbf{EYE-D} video analytics solution. The objective is to provide a smart, scalable, and highly efficient inference pipeline capable of executing advanced visual tasks directly on edge NPUs.
+
+Our methodology combines rigorous data engineering with specialized single-stage architectures (such as the YOLO family) to deliver a robust and modular intelligent platform. The system is designed to address two primary operational domains: logistical optimization (forklift tracking and speed estimation) and industrial safety (real-time fire and smoke detection). Ultimately, this project enhances operational decision-making, ensures faster emergency responses, and improves overall safety compliance across industrial networks.
+
+\section*{Work Organization}
+This report presents a comprehensive overview of the research, design, implementation, and optimization of the proposed Edge-AI computer vision pipelines. The structure of the report is as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter 1: Project Overview and Requirements Analysis} \\
+    Introduces the project scope and the institutional context. Describes the motivation, objectives, specific NPU deployment constraints, and the CRISP-DM methodology adopted throughout the project.
+    
+    \item \textbf{Chapter 2: Phase 1 - Dataset Engineering \& Lifecycle Strategy} \\
+    Explores the foundational data engineering pipeline. This chapter details the data collection, curation, annotation, and augmentation processes, highlighting the critical role of dataset refinement in constrained edge deployments.
+    
+    \item \textbf{Chapter 3: Phase 2 - Industrial Safety Optimization} \\
+    Details the modeling and deployment of fire and smoke detection systems. It focuses on architecture selection, handling challenging environmental artifacts to reduce false positives, and evaluating models under strict real-time constraints.
+    
+    \item \textbf{Chapter 4: Phase 3 - Logistical Monitoring \& Speed Estimation} \\
+    Presents the development of tracking and speed estimation pipelines for industrial vehicles (forklifts). It covers advanced visual tracking, homography transformations, and model optimization for real-world traffic management.
+    
+    \item \textbf{Chapter 5: Phase 4 - Zero-Shot Detection \& Future Capabilities} \\
+    Explores state-of-the-art multimodal AI architectures, including Vision-Language Models and Zero-Shot object detection. This chapter evaluates their potential and limitations for future integration into resource-constrained edge environments.
+\end{itemize}
