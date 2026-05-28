@@ -155,14 +155,14 @@ Both the logistical optimization phase (Forklift Detection and Speed Estimation)
     \item \textbf{6. Deployment:} The final PyTorch models from both phases were exported to ONNX format, ensuring cross-platform interoperability. These ONNX artifacts were then compiled into optimized inference engines and deployed directly onto the edge NPU, fulfilling the project's strict latency and privacy requirements.
 \end{itemize}
 
-As illustrated in Figure~\ref{fig:methodology}, the project methodology is governed by a circular CRISP-DM lifecycle that ensures rigorous technical execution across all steps. This framework specifically accommodates an iterative feedback loop between the evaluation and data preparation stages. Such a loop was essential for implementing Hard-Negative Mining in the Fire/Smoke dataset, allowing the system to continuously refine its understanding of challenging environmental artifacts and reduce false positive alerts.
-  
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.65\textwidth]{diagrams/crisp_dm.png}
 \caption{CRISP-DM lifecycle governing the project methodology and technical execution.}
 \label{fig:methodology}
 \end{figure}
+
+As illustrated in Figure~\ref{fig:methodology}, the project methodology is governed by a circular CRISP-DM lifecycle that ensures rigorous technical execution across all steps. This framework specifically accommodates an iterative feedback loop between the evaluation and data preparation stages. Such a loop was essential for implementing Hard-Negative Mining in the Fire/Smoke dataset, allowing the system to continuously refine its understanding of challenging environmental artifacts and reduce false positive alerts.
 
 For project tracking and collaboration, \textbf{GitHub} was used as the central platform, supporting version control and coordination of development activities.
 
